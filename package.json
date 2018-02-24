@@ -16,6 +16,7 @@
     "electron-react-devtools": "0.5.3",
     "electron-webpack": "1.13.0",
     "electron-webpack-ts": "1.4.0",
+    "prettier": "1.10.2",
     "source-map-support": "0.5.3",
     "typescript": "2.7.2",
     "webpack": "3.11.0"

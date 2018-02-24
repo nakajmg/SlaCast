@@ -1,6 +1,6 @@
-import {app, BrowserWindow} from 'electron'
+import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
-import {format as formatURL} from 'url'
+import { format as formatURL } from 'url'
 
 const isDevelopment: boolean = process.env.NODE_ENV !== 'production'
 
@@ -16,13 +16,14 @@ function createMainWindow() {
 
   if (isDevelopment) {
     window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
-  }
-  else {
-    window.loadURL(formatURL({
-      pathname: path.join(__dirname, 'index.html'),
-      protocol: 'file',
-      slashes: true
-    }))
+  } else {
+    window.loadURL(
+      formatURL({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file',
+        slashes: true,
+      }),
+    )
   }
 
   window.on('closed', () => {
