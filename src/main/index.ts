@@ -4,11 +4,16 @@ import { format as formatURL } from 'url'
 
 const isDevelopment: boolean = process.env.NODE_ENV !== 'production'
 
-// global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow: BrowserWindow | null
 
 function createMainWindow() {
-  const window = new BrowserWindow()
+  const window = new BrowserWindow({
+    width: 640,
+    height: 480,
+    frame: false,
+    transparent: true,
+    alwaysOnTop: true,
+  })
 
   if (isDevelopment) {
     // window.webContents.openDevTools()
@@ -40,22 +45,18 @@ function createMainWindow() {
   return window
 }
 
-// quit application when all windows are closed
 app.on('window-all-closed', () => {
-  // on macOS it is common for applications to stay open until the user explicitly quits
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
 
 app.on('activate', () => {
-  // on macOS it is common to re-create a window even after all windows have been closed
   if (mainWindow === null) {
     mainWindow = createMainWindow()
   }
 })
 
-// create main BrowserWindow when electron is ready
 app.on('ready', () => {
   mainWindow = createMainWindow()
 })

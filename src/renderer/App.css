@@ -1,0 +1,5 @@
+body {
+  -webkit-app-region: drag;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.1);
+}
