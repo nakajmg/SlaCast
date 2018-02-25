@@ -21,4 +21,4 @@ src/**/*.js
 src/**/*.jsx
 src/**/*.map
 
-.env.js
+.env.*
