@@ -4,17 +4,21 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron-webpack dev"
+    "start": "electron-webpack dev",
+    "build": "electron-webpack",
+    "pack": "npm run build && electron-builder"
   },
   "author": "nakajmg",
   "license": "",
   "devDependencies": {
+    "@types/electron-json-storage": "^4.0.0",
     "@types/lodash": "^4.14.104",
     "@types/react": "16.0.38",
     "@types/react-dom": "16.0.4",
     "@types/slack-node": "^0.1.2",
     "babel-preset-react": "6.24.1",
     "electron": "1.8.2",
+    "electron-builder": "^20.2.0",
     "electron-react-devtools": "0.5.3",
     "electron-webpack": "1.13.0",
     "electron-webpack-ts": "1.4.0",
@@ -28,6 +32,7 @@
   "dependencies": {
     "@slack/client": "^3.16.0",
     "axios": "^0.18.0",
+    "electron-json-storage": "^4.0.2",
     "lodash": "^4.17.5",
     "mobx": "^3.5.1",
     "mobx-react": "^4.4.2",
