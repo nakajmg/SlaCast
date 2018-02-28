@@ -1,6 +1,11 @@
 import storage from 'electron-json-storage'
 import { isEqual } from 'lodash'
 
+const keys = {
+  CLIENT_TOKEN: 'clientToken',
+  PREFERENCE: 'preference',
+}
+
 const get = (key: string) => {
   return new Promise(resolve => {
     storage.get(key, (error, data) => {
@@ -29,9 +34,9 @@ const clear = () => {
   })
 }
 
-const keys = {
-  CLIENT_TOKEN: 'clientToken',
-  PREFERENCE: 'preference',
+const getClientToken = async (): Promise<string> => {
+  const token: any = await get(keys.CLIENT_TOKEN)
+  return token
 }
 
 export default {
@@ -39,4 +44,5 @@ export default {
   set,
   clear,
   keys,
+  getClientToken,
 }
