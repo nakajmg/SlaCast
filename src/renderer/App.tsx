@@ -4,41 +4,47 @@ import { observable, IObservableArray } from 'mobx'
 import { observer } from 'mobx-react'
 import { ipcRenderer } from 'electron'
 import { MessageEvent } from '@slack/client'
-// const env = require('../../.env.js')
-// const { WebClient } = require('@slack/client')
-interface IMessage {
-  text: string
-  ts: string
-}
-const messages: IObservableArray<IMessage> = observable([])
+import util from 'util'
+const messages: IObservableArray<MessageEvent> = observable([])
 
-ipcRenderer.on('slackmessage', (e: EventListenerObject, message: MessageEvent) => {
-  messages.push(message)
-})
-/*
-const web = new WebClient(env.TOKEN)
+ipcRenderer.on(
+  'slackmessage',
+  (e: EventListenerObject, message: MessageEvent) => {
+    console.log(util.inspect(message))
+    messages.push(message)
+  },
+)
+// let web: any
 
-web.channels
-  .history(env.CHANNEL_ID, {
-    oldest: '1519539000.000000',
-  })
-  .then(({ messages: [] }) => {
-    messages.forEach((message: IMessage) => messages.push(message))
-    console.log(messages)
-    // web.chat.postMessage(env.CHANNEL_ID, 'テストだよ')
-  })
+// function Message(props: any) {
+//   return (
+//     <div>
+//       <h4>
+//         #{web.channels[props.channel]}({props.channel})
+//       </h4>
+//       <div>
+//         {web.members[props.user]}({props.user}): {props.text}
+//       </div>
+//     </div>
+//   )
+// }
 
-  .catch(console.error)
-*/
-
-function MessageItem({ text, ts }: IMessage) {
-  return <div key={ts}>{text}</div>
+function MessageItem({ text, ts, channel, user, message }: MessageEvent) {
+  return (
+    <div key={ts}>
+      #{channel}, {user}, {text}
+    </div>
+  )
 }
 
 @observer
 class App extends React.Component<{}, {}> {
   render() {
-    return <div>{messages.map((message: IMessage) => MessageItem(message))}</div>
+    return (
+      <div>
+        ready{messages.map((message: MessageEvent) => MessageItem(message))}
+      </div>
+    )
   }
 }
 
