@@ -1,4 +1,9 @@
-import { RtmClient, CLIENT_EVENTS, RTM_EVENTS, RtmStartResult } from '@slack/client'
+import {
+  RtmClient,
+  CLIENT_EVENTS,
+  RTM_EVENTS,
+  RtmStartResult,
+} from '@slack/client'
 import * as EventEmitter from 'events'
 
 class SlackRtmClient extends EventEmitter {
@@ -18,8 +23,8 @@ class SlackRtmClient extends EventEmitter {
   _start() {
     this.client.start()
     this.client.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (data: RtmStartResult) => {
-      console.log(Object.keys(data))
       console.log('authenticated')
+      return data
       // console.log(data.channels)
       // console.log(data.users)
     })
@@ -31,6 +36,7 @@ class SlackRtmClient extends EventEmitter {
 
   describeChannel() {
     this.client.on(RTM_EVENTS.MESSAGE, (message: MessageEvent) => {
+      console.log(message)
       this.emit(RTM_EVENTS.MESSAGE, message)
     })
   }
