@@ -20,7 +20,23 @@ const set = (key: string, value: any) => {
   })
 }
 
+const clear = () => {
+  return new Promise(resolve => {
+    storage.clear(error => {
+      if (error) throw error
+      resolve()
+    })
+  })
+}
+
+const keys = {
+  CLIENT_TOKEN: 'clientToken',
+  PREFERENCE: 'preference',
+}
+
 export default {
   get,
   set,
+  clear,
+  keys,
 }

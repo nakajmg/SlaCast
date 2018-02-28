@@ -1,49 +1,14 @@
-import { app, BrowserWindow } from 'electron'
-import * as path from 'path'
-import { format as formatURL } from 'url'
+import { app, BrowserWindow, ipcMain } from 'electron'
+// import SlackRtmClient from '../slack/Rtm'
+// import env from '../../.env.js'
+// import { MessageEvent } from '@slack/client'
+import storage from '../modules/storage'
+import createClientWindow from './client'
+import createSigninWindow from './signin'
+import events from '../modules/events'
 
-const isDevelopment: boolean = process.env.NODE_ENV !== 'production'
-
-let mainWindow: BrowserWindow | null
-
-function createMainWindow() {
-  const window = new BrowserWindow({
-    width: 640,
-    height: 480,
-    frame: false,
-    transparent: true,
-    alwaysOnTop: true,
-  })
-
-  if (isDevelopment) {
-    // window.webContents.openDevTools()
-  }
-
-  if (isDevelopment) {
-    window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
-  } else {
-    window.loadURL(
-      formatURL({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file',
-        slashes: true,
-      }),
-    )
-  }
-
-  window.on('closed', () => {
-    mainWindow = null
-  })
-
-  window.webContents.on('devtools-opened', () => {
-    window.focus()
-    setImmediate(() => {
-      window.focus()
-    })
-  })
-
-  return window
-}
+let clientWindow: BrowserWindow | null
+let signinWindow: BrowserWindow | null
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -51,12 +16,52 @@ app.on('window-all-closed', () => {
   }
 })
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    mainWindow = createMainWindow()
+// app.on('activate', () => {
+//   if (clientWindow === null) {
+//     clientWindow = createClientWindow()
+//     clientWindow.on('closed', () => {
+//       clientWindow = null
+//     })
+//   }
+// })
+
+app.on('ready', async () => {
+  // await storage.clear() // for debug
+  const token = await storage.get(storage.keys.CLIENT_TOKEN)
+  console.log(token)
+  if (token) {
+    openClient()
+  } else {
+    openSignin()
   }
 })
 
-app.on('ready', () => {
-  mainWindow = createMainWindow()
+ipcMain.on(events.RECEIVE_SLACK_TOKEN, async (e: Event, query: any) => {
+  await storage.set(storage.keys.CLIENT_TOKEN, query.token)
+  if (signinWindow) signinWindow.close()
+  openClient()
 })
+
+function openClient() {
+  if (clientWindow) return
+  clientWindow = createClientWindow()
+  clientWindow.on('closed', () => {
+    clientWindow = null
+  })
+}
+
+function openSignin() {
+  if (signinWindow) return
+  signinWindow = createSigninWindow()
+  signinWindow.on('closed', () => {
+    signinWindow = null
+  })
+}
+
+/*
+const rtm = new SlackRtmClient(env.BOT_TOKEN)
+rtm.on('message', (message: MessageEvent) => {
+  if (!clientWindow) return
+  clientWindow.webContents.send('slackmessage', message)
+})
+*/
