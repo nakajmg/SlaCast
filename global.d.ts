@@ -16,7 +16,10 @@ declare module '@slack/client' {
       },
     )
 
-    on(event: CLIENT_EVENTS.WEB.RATE_LIMITED_TYPE, handler?: (headerSecs: number) => void): void
+    on(
+      event: CLIENT_EVENTS.WEB.RATE_LIMITED_TYPE,
+      handler?: (headerSecs: number) => void,
+    ): void
 
     api: WebApiApi
     auth: WebApiAuth
@@ -72,87 +75,213 @@ declare module '@slack/client' {
     send(message: any, optCb?: any): any
 
     on(event: CLIENT_EVENTS.RTM.CONNECTING_TYPE, handler?: () => void): void
-    on(event: CLIENT_EVENTS.RTM.AUTHENTICATED_TYPE, handler?: (data?: RtmStartResult) => void): void
+    on(
+      event: CLIENT_EVENTS.RTM.AUTHENTICATED_TYPE,
+      handler?: (data?: RtmStartResult) => void,
+    ): void
     on(event: CLIENT_EVENTS.RTM.WS_OPENING_TYPE, handler?: () => void): void
     on(event: CLIENT_EVENTS.RTM.WS_OPENED_TYPE, handler?: () => void): void
-    on(event: CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED_TYPE, handler?: () => void): void
+    on(
+      event: CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED_TYPE,
+      handler?: () => void,
+    ): void
     on(
       event: CLIENT_EVENTS.RTM.DISCONNECT_TYPE,
       handler?: (optError?: Error, optCode?: number) => void,
     ): void
-    on(event: CLIENT_EVENTS.RTM.UNABLE_TO_RTM_START_TYPE, handler?: (err?: Error) => void): void
+    on(
+      event: CLIENT_EVENTS.RTM.UNABLE_TO_RTM_START_TYPE,
+      handler?: (err?: Error) => void,
+    ): void
     on(
       event: CLIENT_EVENTS.RTM.WS_CLOSE_TYPE,
       handler?: (code?: number, reason?: string) => void,
     ): void
-    on(event: CLIENT_EVENTS.RTM.WS_ERROR_TYPE, handler?: (err?: Error) => void): void
-    on(event: CLIENT_EVENTS.RTM.ATTEMPTING_RECONNECT_TYPE, handler?: () => void): void
-    on(event: CLIENT_EVENTS.RTM.RAW_MESSAGE_TYPE, handler?: (wsMsg: string) => void): void
+    on(
+      event: CLIENT_EVENTS.RTM.WS_ERROR_TYPE,
+      handler?: (err?: Error) => void,
+    ): void
+    on(
+      event: CLIENT_EVENTS.RTM.ATTEMPTING_RECONNECT_TYPE,
+      handler?: () => void,
+    ): void
+    on(
+      event: CLIENT_EVENTS.RTM.RAW_MESSAGE_TYPE,
+      handler?: (wsMsg: string) => void,
+    ): void
 
-    on(event: RTM_EVENTS.ACCOUNTS_CHANGED_TYPE, handler?: (data: any) => void): void
+    on(
+      event: RTM_EVENTS.ACCOUNTS_CHANGED_TYPE,
+      handler?: (data: any) => void,
+    ): void
     on(event: RTM_EVENTS.BOT_ADDED_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.BOT_CHANGED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.CHANNEL_ARCHIVE_TYPE, handler?: (data: ChannelArchiveEvent) => void): void
-    on(event: RTM_EVENTS.CHANNEL_CREATED_TYPE, handler?: (data: ChannelCreatedEvent) => void): void
-    on(event: RTM_EVENTS.CHANNEL_DELETED_TYPE, handler?: (data: ChannelDeletedEvent) => void): void
-    on(event: RTM_EVENTS.CHANNEL_HISTORY_CHANGED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.CHANNEL_JOINED_TYPE, handler?: (data: ChannelJoinedEvent) => void): void
+    on(
+      event: RTM_EVENTS.CHANNEL_ARCHIVE_TYPE,
+      handler?: (data: ChannelArchiveEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.CHANNEL_CREATED_TYPE,
+      handler?: (data: ChannelCreatedEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.CHANNEL_DELETED_TYPE,
+      handler?: (data: ChannelDeletedEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.CHANNEL_HISTORY_CHANGED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.CHANNEL_JOINED_TYPE,
+      handler?: (data: ChannelJoinedEvent) => void,
+    ): void
     on(event: RTM_EVENTS.CHANNEL_LEFT_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.CHANNEL_MARKED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.CHANNEL_RENAME_TYPE, handler?: (data: ChannelRenameEvent) => void): void
+    on(
+      event: RTM_EVENTS.CHANNEL_MARKED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.CHANNEL_RENAME_TYPE,
+      handler?: (data: ChannelRenameEvent) => void,
+    ): void
     on(
       event: RTM_EVENTS.CHANNEL_UNARCHIVE_TYPE,
       handler?: (data: ChannelUnarchiveEvent) => void,
     ): void
-    on(event: RTM_EVENTS.COMMANDS_CHANGED_TYPE, handler?: (data: any) => void): void
+    on(
+      event: RTM_EVENTS.COMMANDS_CHANGED_TYPE,
+      handler?: (data: any) => void,
+    ): void
     on(event: RTM_EVENTS.DND_UPDATED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.DND_UPDATED_USER_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.EMAIL_DOMAIN_CHANGED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.EMOJI_CHANGED_TYPE, handler?: (data: any) => void): void
+    on(
+      event: RTM_EVENTS.DND_UPDATED_USER_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.EMAIL_DOMAIN_CHANGED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.EMOJI_CHANGED_TYPE,
+      handler?: (data: any) => void,
+    ): void
     on(event: RTM_EVENTS.FILE_CHANGE_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.FILE_COMMENT_ADDED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.FILE_COMMENT_DELETED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.FILE_COMMENT_EDITED_TYPE, handler?: (data: any) => void): void
+    on(
+      event: RTM_EVENTS.FILE_COMMENT_ADDED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.FILE_COMMENT_DELETED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.FILE_COMMENT_EDITED_TYPE,
+      handler?: (data: any) => void,
+    ): void
     on(event: RTM_EVENTS.FILE_CREATED_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.FILE_DELETED_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.FILE_PRIVATE_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.FILE_PUBLIC_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.FILE_SHARED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.FILE_UNSHARED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.GROUP_ARCHIVE_TYPE, handler?: (data: GroupArchiveEvent) => void): void
-    on(event: RTM_EVENTS.GROUP_CLOSE_TYPE, handler?: (data: GroupCloseEvent) => void): void
-    on(event: RTM_EVENTS.GROUP_HISTORY_CHANGED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.GROUP_JOINED_TYPE, handler?: (data: GroupJoinedEvent) => void): void
-    on(event: RTM_EVENTS.GROUP_LEFT_TYPE, handler?: (data: GroupLeftEvent) => void): void
+    on(
+      event: RTM_EVENTS.FILE_UNSHARED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.GROUP_ARCHIVE_TYPE,
+      handler?: (data: GroupArchiveEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.GROUP_CLOSE_TYPE,
+      handler?: (data: GroupCloseEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.GROUP_HISTORY_CHANGED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.GROUP_JOINED_TYPE,
+      handler?: (data: GroupJoinedEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.GROUP_LEFT_TYPE,
+      handler?: (data: GroupLeftEvent) => void,
+    ): void
     on(event: RTM_EVENTS.GROUP_MARKED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.GROUP_OPEN_TYPE, handler?: (data: GroupOpenEvent) => void): void
-    on(event: RTM_EVENTS.GROUP_RENAME_TYPE, handler?: (data: GroupRenameEvent) => void): void
-    on(event: RTM_EVENTS.GROUP_UNARCHIVE_TYPE, handler?: (data: GroupUnarchiveEvent) => void): void
+    on(
+      event: RTM_EVENTS.GROUP_OPEN_TYPE,
+      handler?: (data: GroupOpenEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.GROUP_RENAME_TYPE,
+      handler?: (data: GroupRenameEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.GROUP_UNARCHIVE_TYPE,
+      handler?: (data: GroupUnarchiveEvent) => void,
+    ): void
     on(event: RTM_EVENTS.HELLO_TYPE, handler?: (data: HelloEvent) => void): void
     on(event: RTM_EVENTS.IM_CLOSE_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.IM_CREATED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.IM_HISTORY_CHANGED_TYPE, handler?: (data: any) => void): void
+    on(
+      event: RTM_EVENTS.IM_HISTORY_CHANGED_TYPE,
+      handler?: (data: any) => void,
+    ): void
     on(event: RTM_EVENTS.IM_MARKED_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.IM_OPEN_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.MANUAL_PRESENCE_CHANGE_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.MESSAGE_TYPE, handler?: (data: MessageEvent) => void): void
+    on(
+      event: RTM_EVENTS.MANUAL_PRESENCE_CHANGE_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.MESSAGE_TYPE,
+      handler?: (data: MessageEvent) => void,
+    ): void
     on(event: RTM_EVENTS.MPIM_CLOSE_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.MPIM_HISTORY_CHANGED_TYPE, handler?: (data: any) => void): void
+    on(
+      event: RTM_EVENTS.MPIM_HISTORY_CHANGED_TYPE,
+      handler?: (data: any) => void,
+    ): void
     on(event: RTM_EVENTS.MPIM_JOINED_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.MPIM_OPEN_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.PIN_ADDED_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.PIN_REMOVED_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.PREF_CHANGE_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.PRESENCE_CHANGE_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.REACTION_ADDED_TYPE, handler?: (data: ReactionEvent) => void): void
-    on(event: RTM_EVENTS.REACTION_REMOVED_TYPE, handler?: (data: ReactionEvent) => void): void
-    on(event: RTM_EVENTS.RECONNECT_URL_TYPE, handler?: (data: any) => void): void
+    on(
+      event: RTM_EVENTS.PRESENCE_CHANGE_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.REACTION_ADDED_TYPE,
+      handler?: (data: ReactionEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.REACTION_REMOVED_TYPE,
+      handler?: (data: ReactionEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.RECONNECT_URL_TYPE,
+      handler?: (data: any) => void,
+    ): void
     on(event: RTM_EVENTS.STAR_ADDED_TYPE, handler?: (data: any) => void): void
     on(event: RTM_EVENTS.STAR_REMOVED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.SUBTEAM_CREATED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.SUBTEAM_SELF_ADDED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.SUBTEAM_SELF_REMOVED_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.SUBTEAM_UPDATED_TYPE, handler?: (data: any) => void): void
+    on(
+      event: RTM_EVENTS.SUBTEAM_CREATED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.SUBTEAM_SELF_ADDED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.SUBTEAM_SELF_REMOVED_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.SUBTEAM_UPDATED_TYPE,
+      handler?: (data: any) => void,
+    ): void
     on(
       event: RTM_EVENTS.TEAM_DOMAIN_CHANGE_TYPE,
       handler?: (data: TeamDomainChangeEvent) => void,
@@ -162,14 +291,35 @@ declare module '@slack/client' {
       event: RTM_EVENTS.TEAM_MIGRATION_STARTED_TYPE,
       handler?: (data: TeamMigrationStartedEvent) => void,
     ): void
-    on(event: RTM_EVENTS.TEAM_PLAN_CHANGE_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.TEAM_PREF_CHANGE_TYPE, handler?: (data: TeamPrefChangeEvent) => void): void
-    on(event: RTM_EVENTS.TEAM_PROFILE_CHANGE_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.TEAM_PROFILE_DELETE_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.TEAM_PROFILE_REORDER_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.TEAM_RENAME_TYPE, handler?: (data: TeamRenameEvent) => void): void
+    on(
+      event: RTM_EVENTS.TEAM_PLAN_CHANGE_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.TEAM_PREF_CHANGE_TYPE,
+      handler?: (data: TeamPrefChangeEvent) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.TEAM_PROFILE_CHANGE_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.TEAM_PROFILE_DELETE_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.TEAM_PROFILE_REORDER_TYPE,
+      handler?: (data: any) => void,
+    ): void
+    on(
+      event: RTM_EVENTS.TEAM_RENAME_TYPE,
+      handler?: (data: TeamRenameEvent) => void,
+    ): void
     on(event: RTM_EVENTS.USER_CHANGE_TYPE, handler?: (data: any) => void): void
-    on(event: RTM_EVENTS.USER_TYPING_TYPE, handler?: (data: UserTypingEvent) => void): void
+    on(
+      event: RTM_EVENTS.USER_TYPING_TYPE,
+      handler?: (data: UserTypingEvent) => void,
+    ): void
   }
 
   class RtmClient extends _RtmClientBase {
@@ -210,7 +360,9 @@ declare module '@slack/client' {
       message: string | ChatPostMessageParams,
       cb: (err: Error, result: ChatPostMessageResult) => void,
     ): void
-    send(message: string | ChatPostMessageParams): Promise<ChatPostMessageResult>
+    send(
+      message: string | ChatPostMessageParams,
+    ): Promise<ChatPostMessageResult>
   }
 
   class LegacyRtmClient extends _RtmClientBase {
@@ -531,13 +683,19 @@ declare module '@slack/client' {
   // https://api.slack.com/web
   interface WebApiApi {
     test(callback: (err: Error, result: ApiTestResult) => void): void
-    test(opts: ApiTestParams, callback: (err: Error, result: ApiTestResult) => void): void
+    test(
+      opts: ApiTestParams,
+      callback: (err: Error, result: ApiTestResult) => void,
+    ): void
     test(opts?: ApiTestParams): Promise<ApiTestResult>
   }
 
   interface WebApiAuth {
     revoke(callback: (err: Error, result: AuthRevokeResult) => void): void
-    revoke(opts: AuthRevokeParams, callback: (err: Error, result: AuthRevokeResult) => void): void
+    revoke(
+      opts: AuthRevokeParams,
+      callback: (err: Error, result: AuthRevokeResult) => void,
+    ): void
     revoke(opts?: AuthRevokeParams): Promise<AuthRevokeResult>
 
     test(callback: (err: Error, result: AuthTestResult) => void): void
@@ -546,15 +704,24 @@ declare module '@slack/client' {
 
   interface WebApiBots {
     info(callback: (err: Error, result: BotsInfoResult) => void): void
-    info(opts: BotsInfoParams, callback: (err: Error, result: BotsInfoResult) => void): void
+    info(
+      opts: BotsInfoParams,
+      callback: (err: Error, result: BotsInfoResult) => void,
+    ): void
     info(opts?: BotsInfoParams): Promise<BotsInfoResult>
   }
 
   interface WebApiChannels {
-    archive(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    archive(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     archive(channel: string): Promise<WebApiResultAny>
 
-    create(name: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    create(
+      name: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     create(name: string): Promise<WebApiResultAny>
 
     history(callback: (err: Error, result: WebApiResultAny) => void): void
@@ -565,7 +732,10 @@ declare module '@slack/client' {
     ): void
     history(channel: string, opts?: Object): Promise<WebApiResultAny>
 
-    info(channel: string, callback: (err: Error, result: ChannelsInfoResult) => void): void
+    info(
+      channel: string,
+      callback: (err: Error, result: ChannelsInfoResult) => void,
+    ): void
     info(channel: string): Promise<ChannelsInfoResult>
 
     invite(
@@ -575,7 +745,10 @@ declare module '@slack/client' {
     ): void
     invite(channel: string, user: string): Promise<WebApiResultAny>
 
-    join(name: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    join(
+      name: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     join(name: string): Promise<WebApiResultAny>
 
     kick(
@@ -585,14 +758,24 @@ declare module '@slack/client' {
     ): void
     kick(channel: string, user: string): Promise<WebApiResultAny>
 
-    leave(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    leave(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     leave(channel: string): Promise<WebApiResultAny>
 
     list(callback: (err: Error, result: ChannelsListResult) => void): void
-    list(opts: ChannelsListParams, callback: (err: Error, result: ChannelsListResult) => void): void
+    list(
+      opts: ChannelsListParams,
+      callback: (err: Error, result: ChannelsListResult) => void,
+    ): void
     list(opts?: ChannelsListParams): Promise<ChannelsListResult>
 
-    mark(channel: string, ts: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    mark(
+      channel: string,
+      ts: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     mark(channel: string, ts: string): Promise<WebApiResultAny>
 
     rename(
@@ -623,7 +806,10 @@ declare module '@slack/client' {
     ): void
     setTopic(channel: string, topic: string): Promise<WebApiResultAny>
 
-    unarchive(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    unarchive(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     unarchive(channel: string): Promise<WebApiResultAny>
   }
 
@@ -639,7 +825,11 @@ declare module '@slack/client' {
       opts: ChatDeleteParams,
       callback: (err: Error, result: ChatDeleteResult) => void,
     ): void
-    delete(ts: string, channel: string, opts?: ChatDeleteParams): Promise<ChatDeleteResult>
+    delete(
+      ts: string,
+      channel: string,
+      opts?: ChatDeleteParams,
+    ): Promise<ChatDeleteResult>
 
     meMessage(
       channel: string,
@@ -678,7 +868,12 @@ declare module '@slack/client' {
       opts: Object,
       callback: (err: Error, result: WebApiResult) => void,
     ): void
-    unfurl(ts: string, channel: string, unfurls: string, opts?: Object): Promise<WebApiResult>
+    unfurl(
+      ts: string,
+      channel: string,
+      unfurls: string,
+      opts?: Object,
+    ): Promise<WebApiResult>
 
     update(
       ts: string,
@@ -709,14 +904,23 @@ declare module '@slack/client' {
     endSnooze(): Promise<WebApiResultAny>
 
     info(callback: (err: Error, result: WebApiResultAny) => void): void
-    info(opts: Object, callback: (err: Error, result: WebApiResultAny) => void): void
+    info(
+      opts: Object,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     info(opts?: Object): Promise<WebApiResultAny>
 
-    setSnooze(numMinutes: number, callback: (err: Error, result: WebApiResultAny) => void): void
+    setSnooze(
+      numMinutes: number,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     setSnooze(numMinutes: number): Promise<WebApiResultAny>
 
     teamInfo(callback: (err: Error, result: WebApiResultAny) => void): void
-    teamInfo(opts: Object, callback: (err: Error, result: WebApiResultAny) => void): void
+    teamInfo(
+      opts: Object,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     teamInfo(opts?: Object): Promise<WebApiResultAny>
   }
 
@@ -726,24 +930,46 @@ declare module '@slack/client' {
   }
 
   interface WebApiFiles {
-    delete(file: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    delete(
+      file: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     delete(file: string): Promise<WebApiResultAny>
 
-    info(file: string, callback: (err: Error, result: WebApiResultAny) => void): void
-    info(file: string, opts: Object, callback: (err: Error, result: WebApiResultAny) => void): void
+    info(
+      file: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
+    info(
+      file: string,
+      opts: Object,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     info(file: string, opts?: Object): Promise<WebApiResultAny>
 
     list(callback: (err: Error, result: WebApiResultAny) => void): void
-    list(opts: Object, callback: (err: Error, result: WebApiResultAny) => void): void
+    list(
+      opts: Object,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     list(opts?: Object): Promise<WebApiResultAny>
 
-    revokePublicURL(file: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    revokePublicURL(
+      file: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     revokePublicURL(file: string): Promise<WebApiResultAny>
 
-    sharedPublicURL(file: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    sharedPublicURL(
+      file: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     sharedPublicURL(file: string): Promise<WebApiResultAny>
 
-    upload(filename: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    upload(
+      filename: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     upload(
       filename: string,
       opts: Object,
@@ -763,7 +989,11 @@ declare module '@slack/client' {
         opts: Object,
         callback: (err: Error, result: WebApiResultAny) => void,
       ): void
-      add(file: string, comment: string, opts?: Object): Promise<WebApiResultAny>
+      add(
+        file: string,
+        comment: string,
+        opts?: Object,
+      ): Promise<WebApiResultAny>
 
       delete(
         file: string,
@@ -783,19 +1013,34 @@ declare module '@slack/client' {
   }
 
   interface WebApiGroups {
-    archive(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    archive(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     archive(channel: string): Promise<WebApiResultAny>
 
-    close(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    close(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     close(channel: string): Promise<WebApiResultAny>
 
-    create(name: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    create(
+      name: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     create(name: string): Promise<WebApiResultAny>
 
-    createChild(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    createChild(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     createChild(channel: string): Promise<WebApiResultAny>
 
-    history(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    history(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     history(
       channel: string,
       opts: Object,
@@ -803,7 +1048,10 @@ declare module '@slack/client' {
     ): void
     history(channel: string, opts?: Object): Promise<WebApiResultAny>
 
-    info(channel: string, callback: (err: Error, result: GroupsInfoResult) => void): void
+    info(
+      channel: string,
+      callback: (err: Error, result: GroupsInfoResult) => void,
+    ): void
     info(channel: string): Promise<GroupsInfoResult>
 
     invite(
@@ -820,17 +1068,31 @@ declare module '@slack/client' {
     ): void
     kick(channel: string, user: string): Promise<WebApiResultAny>
 
-    leave(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    leave(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     leave(channel: string): Promise<WebApiResultAny>
 
     list(callback: (err: Error, result: GroupsListResult) => void): void
-    list(opts: ChannelsListParams, callback: (err: Error, result: GroupsListResult) => void): void
+    list(
+      opts: ChannelsListParams,
+      callback: (err: Error, result: GroupsListResult) => void,
+    ): void
     list(opts?: ChannelsListParams): Promise<GroupsListResult>
 
-    mark(channel: string, ts: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    mark(
+      channel: string,
+      ts: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     mark(channel: string, ts: string): Promise<WebApiResultAny>
 
-    open(channel: string, ts: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    open(
+      channel: string,
+      ts: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     open(channel: string, ts: string): Promise<WebApiResultAny>
 
     rename(
@@ -861,15 +1123,24 @@ declare module '@slack/client' {
     ): void
     setTopic(channel: string, topic: string): Promise<WebApiResultAny>
 
-    unarchive(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    unarchive(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     unarchive(channel: string): Promise<WebApiResultAny>
   }
 
   interface WebApiIm {
-    close(channel: string, callback: (err: Error, result: ImCloseResult) => void): void
+    close(
+      channel: string,
+      callback: (err: Error, result: ImCloseResult) => void,
+    ): void
     close(channel: string): Promise<ImCloseResult>
 
-    history(channel: string, callback: (err: Error, result: ImHistoryResult) => void): void
+    history(
+      channel: string,
+      callback: (err: Error, result: ImHistoryResult) => void,
+    ): void
     history(
       channel: string,
       opts: ImHistoryParams,
@@ -880,10 +1151,17 @@ declare module '@slack/client' {
     list(callback: (err: Error, result: ImListResult) => void): void
     list(): Promise<ImListResult>
 
-    mark(channel: string, ts: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    mark(
+      channel: string,
+      ts: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     mark(channel: string, ts: string): Promise<WebApiResultAny>
 
-    open(user: string, callback: (err: Error, result: ImOpenResult) => void): void
+    open(
+      user: string,
+      callback: (err: Error, result: ImOpenResult) => void,
+    ): void
     open(
       user: string,
       opts: ImOpenParams,
@@ -900,10 +1178,16 @@ declare module '@slack/client' {
   }
 
   interface WebApiMpim {
-    close(channel: string, callback: (err: Error, result: ImCloseResult) => void): void
+    close(
+      channel: string,
+      callback: (err: Error, result: ImCloseResult) => void,
+    ): void
     close(channel: string): Promise<ImCloseResult>
 
-    history(channel: string, callback: (err: Error, result: ImHistoryResult) => void): void
+    history(
+      channel: string,
+      callback: (err: Error, result: ImHistoryResult) => void,
+    ): void
     history(
       channel: string,
       opts: ImHistoryParams,
@@ -914,10 +1198,17 @@ declare module '@slack/client' {
     list(callback: (err: Error, result: GroupsListResult) => void): void
     list(): Promise<GroupsListResult>
 
-    mark(channel: string, ts: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    mark(
+      channel: string,
+      ts: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     mark(channel: string, ts: string): Promise<WebApiResultAny>
 
-    open(users: string, callback: (err: Error, result: GroupsInfoResult) => void): void
+    open(
+      users: string,
+      callback: (err: Error, result: GroupsInfoResult) => void,
+    ): void
     open(users: string): Promise<GroupsInfoResult>
 
     replies(
@@ -951,7 +1242,10 @@ declare module '@slack/client' {
   }
 
   interface WebApiPins {
-    add(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    add(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     add(
       channel: string,
       opts: Object,
@@ -959,10 +1253,16 @@ declare module '@slack/client' {
     ): void
     add(channel: string, opts?: Object): Promise<WebApiResultAny>
 
-    list(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    list(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     list(channel: string): Promise<WebApiResultAny>
 
-    remove(channel: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    remove(
+      channel: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     remove(
       channel: string,
       opts: Object,
@@ -972,23 +1272,38 @@ declare module '@slack/client' {
   }
 
   interface WebApiPresence {
-    set(presence: 'active' | 'away', callback: (err: Error, result: WebApiResult) => void): void
+    set(
+      presence: 'active' | 'away',
+      callback: (err: Error, result: WebApiResult) => void,
+    ): void
     set(presence: 'active' | 'away'): Promise<WebApiResult>
   }
 
   interface WebApiReactions {
-    add(name: string, callback: (err: Error, result: ReactionsAddResult) => void): void
-    add(name: string, callback: (err: Error, result: ReactionsAddResult) => void): void
+    add(
+      name: string,
+      callback: (err: Error, result: ReactionsAddResult) => void,
+    ): void
+    add(
+      name: string,
+      callback: (err: Error, result: ReactionsAddResult) => void,
+    ): void
     add(name: string, opts?: ReactionsAddParams): Promise<ReactionsAddResult>
 
     get(callback: (err: Error, result: WebApiResultAny) => void): void
-    get(opts: Object, callback: (err: Error, result: WebApiResultAny) => void): void
+    get(
+      opts: Object,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     get(opts?: Object): Promise<WebApiResultAny>
 
     list(opts?: Object, callback?: (err: Error, result: Object) => void): void
     list(opts?: Object): Promise<WebApiResultAny>
 
-    remove(name: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    remove(
+      name: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     remove(
       name: string,
       opts: Object,
@@ -998,7 +1313,11 @@ declare module '@slack/client' {
   }
 
   interface WebApiReminders {
-    add(text: string, time: string, callback: (err: Error, result: WebApiResultAny) => void): void
+    add(
+      text: string,
+      time: string,
+      callback: (err: Error, result: WebApiResultAny) => void,
+    ): void
     add(
       text: string,
       time: string,
@@ -1007,10 +1326,16 @@ declare module '@slack/client' {
     ): void
     add(text: string, time: string, opts?: Object): Promise<WebApiResultAny>
 
-    complete(reminder: string, callback: (err: Error, result: Object) => void): void
+    complete(
+      reminder: string,
+      callback: (err: Error, result: Object) => void,
+    ): void
     complete(reminder: string): Promise<WebApiResultAny>
 
-    delete(reminder: string, callback: (err: Error, result: Object) => void): void
+    delete(
+      reminder: string,
+      callback: (err: Error, result: Object) => void,
+    ): void
     delete(reminder: string): Promise<WebApiResultAny>
 
     info(reminder: string, callback: (err: Error, result: Object) => void): void
@@ -1025,21 +1350,39 @@ declare module '@slack/client' {
     connect(): Promise<RtmConnectResult>
 
     start(callback: (err: Error, result: RtmStartResult) => void): void
-    start(opts: RtmStartParams, callback: (err: Error, result: RtmStartResult) => void): void
+    start(
+      opts: RtmStartParams,
+      callback: (err: Error, result: RtmStartResult) => void,
+    ): void
     start(opts?: RtmStartParams): Promise<RtmStartResult>
   }
 
   interface WebApiSearch {
     all(query: string, callback: (err: Error, result: Object) => void): void
-    all(query: string, opts: Object, callback: (err: Error, result: Object) => void): void
+    all(
+      query: string,
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     all(query: string, opts?: Object): Promise<WebApiResultAny>
 
     files(query: string, callback: (err: Error, result: Object) => void): void
-    files(query: string, opts: Object, callback: (err: Error, result: Object) => void): void
+    files(
+      query: string,
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     files(query: string, opts?: Object): Promise<WebApiResultAny>
 
-    messages(query: string, callback: (err: Error, result: Object) => void): void
-    messages(query: string, opts: Object, callback: (err: Error, result: Object) => void): void
+    messages(
+      query: string,
+      callback: (err: Error, result: Object) => void,
+    ): void
+    messages(
+      query: string,
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     messages(query: string, opts?: Object): Promise<WebApiResultAny>
   }
 
@@ -1059,18 +1402,27 @@ declare module '@slack/client' {
 
   interface WebApiTeam {
     accessLogs(callback: (err: Error, result: Object) => void): void
-    accessLogs(opts: Object, callback: (err: Error, result: Object) => void): void
+    accessLogs(
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     accessLogs(opts?: Object): Promise<WebApiResultAny>
 
     billableInfo(callback: (err: Error, result: Object) => void): void
-    billableInfo(opts: Object, callback: (err: Error, result: Object) => void): void
+    billableInfo(
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     billableInfo(opts?: Object): Promise<WebApiResultAny>
 
     info(callback: (err: Error, result: TeamInfoResult) => void): void
     info(): Promise<TeamInfoResult>
 
     integrationLogs(callback: (err: Error, result: Object) => void): void
-    integrationLogs(opts: Object, callback: (err: Error, result: Object) => void): void
+    integrationLogs(
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     integrationLogs(opts?: Object): Promise<WebApiResultAny>
 
     profile: {
@@ -1082,61 +1434,115 @@ declare module '@slack/client' {
 
   interface WebApiUsergroups {
     create(name: string, callback: (err: Error, result: Object) => void): void
-    create(name: string, opts: Object, callback: (err: Error, result: Object) => void): void
+    create(
+      name: string,
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     create(name: string, opts?: Object): Promise<WebApiResultAny>
 
-    disable(usergroup: string, callback: (err: Error, result: Object) => void): void
-    disable(usergroup: string, opts: Object, callback: (err: Error, result: Object) => void): void
+    disable(
+      usergroup: string,
+      callback: (err: Error, result: Object) => void,
+    ): void
+    disable(
+      usergroup: string,
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     disable(usergroup: string, opts?: Object): Promise<WebApiResultAny>
 
-    enable(usergroup: string, callback: (err: Error, result: Object) => void): void
-    enable(usergroup: string, opts: Object, callback: (err: Error, result: Object) => void): void
+    enable(
+      usergroup: string,
+      callback: (err: Error, result: Object) => void,
+    ): void
+    enable(
+      usergroup: string,
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     enable(usergroup: string, opts?: Object): Promise<WebApiResultAny>
 
     list(callback: (err: Error, result: Object) => void): void
     list(opts: Object, callback: (err: Error, result: Object) => void): void
     list(opts?: Object): Promise<WebApiResultAny>
 
-    update(usergroup: string, callback: (err: Error, result: Object) => void): void
-    update(usergroup: string, opts: Object, callback: (err: Error, result: Object) => void): void
+    update(
+      usergroup: string,
+      callback: (err: Error, result: Object) => void,
+    ): void
+    update(
+      usergroup: string,
+      opts: Object,
+      callback: (err: Error, result: Object) => void,
+    ): void
     update(usergroup: string, opts?: Object): Promise<WebApiResultAny>
 
     users: {
-      list(usergroup: string, callback: (err: Error, result: Object) => void): void
-      list(usergroup: string, opts: Object, callback: (err: Error, result: Object) => void): void
+      list(
+        usergroup: string,
+        callback: (err: Error, result: Object) => void,
+      ): void
+      list(
+        usergroup: string,
+        opts: Object,
+        callback: (err: Error, result: Object) => void,
+      ): void
       list(usergroup: string, opts?: Object): Promise<WebApiResultAny>
 
-      update(usergroup: string, users: string, callback: (err: Error, result: Object) => void): void
+      update(
+        usergroup: string,
+        users: string,
+        callback: (err: Error, result: Object) => void,
+      ): void
       update(
         usergroup: string,
         users: string,
         opts: Object,
         callback: (err: Error, result: Object) => void,
       ): void
-      update(usergroup: string, users: string, opts?: Object): Promise<WebApiResultAny>
+      update(
+        usergroup: string,
+        users: string,
+        opts?: Object,
+      ): Promise<WebApiResultAny>
     }
   }
 
   interface WebApiUsers {
-    getPresence(callback: (err: Error, result: UsersGetPresenceResult) => void): void
-    getPresence(user: string, callback: (err: Error, result: UsersGetPresenceResult) => void): void
+    getPresence(
+      callback: (err: Error, result: UsersGetPresenceResult) => void,
+    ): void
+    getPresence(
+      user: string,
+      callback: (err: Error, result: UsersGetPresenceResult) => void,
+    ): void
     getPresence(user?: string): Promise<UsersGetPresenceResult>
 
     identity(callback: (err: Error, result: Object) => void): void
     identity(): Promise<WebApiResultAny>
 
     info(callback: (err: Error, result: UsersInfoResult) => void): void
-    info(user: string, callback: (err: Error, result: UsersInfoResult) => void): void
+    info(
+      user: string,
+      callback: (err: Error, result: UsersInfoResult) => void,
+    ): void
     info(user?: string): Promise<UsersInfoResult>
 
     list(callback: (err: Error, result: UsersListResult) => void): void
-    list(opts: UsersListParams, callback: (err: Error, result: UsersListResult) => void): void
+    list(
+      opts: UsersListParams,
+      callback: (err: Error, result: UsersListResult) => void,
+    ): void
     list(opts?: UsersListParams): Promise<UsersListResult>
 
     setActive(callback: (err: Error, result: Object) => void): void
     setActive(): Promise<WebApiResultAny>
 
-    setPresence(presence: 'auto' | 'away', callback: (err: Error, result: Object) => void): void
+    setPresence(
+      presence: 'auto' | 'away',
+      callback: (err: Error, result: Object) => void,
+    ): void
     setPresence(presence: 'auto' | 'away'): Promise<WebApiResultAny>
 
     profile: {
@@ -1713,20 +2119,35 @@ declare module '@slack/client' {
 
   interface MessageEvent {
     type: 'message'
-    hidden?: string
+    hidden?: boolean
     subtype?: string
     channel: string
-    user: string
-    text: string
+    user?: string
+    text?: string
     ts: string
-    user_team: string
-    team: string
+    source_team?: string
+    team?: string
     attachments?: MessageAttachment[]
     deleted_ts?: string
     is_starred?: boolean
     pinned_to?: string[]
     edited?: {
       user: string
+      ts: string
+    }
+    thread_ts?: string
+    event_ts?: string
+    message?: {
+      type: string
+      user: string
+      text: string
+      thread_ts: string
+      reply_count: number
+      replies: Array<{
+        ts: string
+        user: string
+      }>
+      unread_count: number
       ts: string
     }
   }
