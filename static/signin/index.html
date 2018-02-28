@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const { ipcRenderer } = require('electron');
+    (() => {
+      if (!location.search) return
+      const queryString = location.search.substr(1)
+      const query = queryString.split('&').reduce((ret, queryString) => {
+        const [key, value] = queryString.split('=')
+        ret[key] = value
+        return ret
+      }, {})
+
+      if (query.token) {
+        ipcRenderer.send('slacktoken', query)
+      }
+    })()
+  </script>
+  <a id="signin" href="#">
+    <img alt="Slack でサインインする" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"
+    />
+  </a>
+  <script>
+    const auth_url = 'https://slack.com/oauth/authorize'
+    const redirect_uri = 'https://us-central1-slack-user-status.cloudfunctions.net/slacommesignin'
+    const this_url = location.href
+    const queryString = `scope=client&client_id=2320436460.319793460160&redirect_uri=${redirect_uri}&state=${this_url}`
+    const href = `${auth_url}?${queryString}`
+    document.addEventListener('DOMContentLoaded', () => {
+      const $button = document.querySelector('#signin')
+      $button.addEventListener('click', (e) => {
+        e.preventDefault()
+        location.href = href
+      })
+    })
+  </script>
+</body>
+
+</html>
