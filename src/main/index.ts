@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
-// import SlackRtmClient from '../slack/Rtm'
+import SlackRtmClient from '../slack/Rtm'
 // import env from '../../.env.js'
-// import { MessageEvent } from '@slack/client'
+import { MessageEvent } from '@slack/client'
 import storage from '../modules/storage'
 import createClientWindow from './client'
 import createSigninWindow from './signin'
@@ -9,6 +9,7 @@ import events from '../modules/events'
 
 let clientWindow: BrowserWindow | null
 let signinWindow: BrowserWindow | null
+let rtm: any
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -27,10 +28,11 @@ app.on('window-all-closed', () => {
 
 app.on('ready', async () => {
   // await storage.clear() // for debug
-  const token = await storage.get(storage.keys.CLIENT_TOKEN)
+  const token: any = await storage.get(storage.keys.CLIENT_TOKEN)
   console.log(token)
   if (token) {
     openClient()
+    connectRtm(token)
   } else {
     openSignin()
   }
@@ -40,6 +42,7 @@ ipcMain.on(events.RECEIVE_SLACK_TOKEN, async (e: Event, query: any) => {
   await storage.set(storage.keys.CLIENT_TOKEN, query.token)
   if (signinWindow) signinWindow.close()
   openClient()
+  connectRtm(query.token)
 })
 
 function openClient() {
@@ -58,10 +61,11 @@ function openSignin() {
   })
 }
 
-/*
-const rtm = new SlackRtmClient(env.BOT_TOKEN)
-rtm.on('message', (message: MessageEvent) => {
-  if (!clientWindow) return
-  clientWindow.webContents.send('slackmessage', message)
-})
-*/
+function connectRtm(token: string) {
+  if (rtm) return
+  rtm = new SlackRtmClient(token)
+  rtm.on('message', (message: MessageEvent) => {
+    if (!clientWindow) return
+    clientWindow.webContents.send('slackmessage', message)
+  })
+}
