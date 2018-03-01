@@ -1,8 +1,11 @@
 import SlackWebClient from '../slack/Web'
-import { observable, computed } from 'mobx'
+import { observable, computed, IObservableArray } from 'mobx'
 import { zipObject, map } from 'lodash'
-import { PartialChannelResult, FullUserResult } from '@slack/client'
-import { IObservableArray } from 'mobx/lib/types/observablearray'
+import {
+  PartialChannelResult,
+  FullUserResult,
+  MessageEvent,
+} from '@slack/client'
 // import storage from './storage'
 
 interface INameMap {
@@ -10,22 +13,20 @@ interface INameMap {
 }
 
 class Store {
-  webClient: SlackWebClient
+  @observable initialized: boolean = false
+  webClient: SlackWebClient | any
   @observable messages: IObservableArray<MessageEvent> = observable([])
   @observable members: IObservableArray<FullUserResult> = observable([])
   @observable channels: IObservableArray<PartialChannelResult> = observable([])
   @observable subscribedChannels: IObservableArray<Object> = observable([])
 
-  constructor(public token: string) {
-    this.token = token
-    this.webClient = new SlackWebClient(this.token)
-  }
-
-  async initialize() {
-    return Promise.all([
+  async initialize(token: string) {
+    this.webClient = new SlackWebClient(token)
+    await Promise.all([
       this.channels.replace(await this.webClient._fetchChannels()),
       this.members.replace(await this.webClient._fetchMembers()),
     ])
+    this.initialized = true
   }
 
   // storageから設定を復元
@@ -51,4 +52,4 @@ class Store {
   }
 }
 
-export default Store
+export default new Store()
