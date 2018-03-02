@@ -14,6 +14,7 @@ interface INameMap {
 
 class Store {
   @observable initialized: boolean = false
+  @observable currentChannel: string = ''
   webClient: SlackWebClient | any
   @observable messages: IObservableArray<MessageEvent> = observable([])
   @observable members: IObservableArray<FullUserResult> = observable([])
@@ -41,6 +42,11 @@ class Store {
       map(this.channels, ({ id }) => id),
       map(this.channels, ({ name }) => name),
     )
+  }
+
+  @computed
+  get currentChannelName(): string {
+    return this.channelsName[this.currentChannel]
   }
 
   @computed

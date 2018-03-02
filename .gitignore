@@ -22,3 +22,4 @@ src/**/*.jsx
 src/**/*.map
 
 .env.*
+_mock.json
