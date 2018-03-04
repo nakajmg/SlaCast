@@ -3,6 +3,7 @@ import './ChatViewer.scss'
 import { Observer, inject } from 'mobx-react'
 import { computed, observable } from 'mobx'
 import { filter } from 'lodash'
+import events from '../../modules/events'
 import { PartialChannelResult, MessageEvent } from '@slack/client'
 import ChannelList from './ChannelList'
 import ChannelFilter from './ChannelFilter'
@@ -28,10 +29,11 @@ class Viewer extends React.Component<any, any> {
   }
   listen() {
     ipcRenderer.on(
-      'slackmessage',
+      events.SLACK_MESSAGE,
       (e: EventListenerObject, message: MessageEvent) => {
         console.log(util.inspect(message))
         this.props.store.messages.push(message)
+        // this.props.store.messages.splice(0, 0, message)
       },
     )
   }
