@@ -1,20 +1,8 @@
 import * as React from 'react'
 import './App.scss'
-import { ipcRenderer } from 'electron'
-import { MessageEvent } from '@slack/client'
-import util from 'util'
 import Root from '../container/Root'
 import Signin from '../container/Signin'
 import { Route, Switch } from 'react-router-dom'
-import store from '../modules/Store'
-
-ipcRenderer.on(
-  'slackmessage',
-  (e: EventListenerObject, message: MessageEvent) => {
-    console.log(util.inspect(message))
-    store.messages.push(message)
-  },
-)
 
 class App extends React.Component<any, any> {
   constructor(props: any) {

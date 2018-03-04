@@ -3,10 +3,13 @@ import './ChatViewer.scss'
 import { Observer, inject } from 'mobx-react'
 import { computed, observable } from 'mobx'
 import { filter } from 'lodash'
-import { PartialChannelResult } from '@slack/client'
+import { PartialChannelResult, MessageEvent } from '@slack/client'
 import ChannelList from './ChannelList'
 import ChannelFilter from './ChannelFilter'
 import ChannelName from './ChannelName'
+import ChatMessagesTree from '../ChatMessagesTree/ChatMessagesTree'
+import { ipcRenderer } from 'electron'
+import util from 'util'
 
 @inject('store')
 class Viewer extends React.Component<any, any> {
@@ -21,6 +24,16 @@ class Viewer extends React.Component<any, any> {
       this,
     )
     this.handleOnKeyUp = this.handleOnKeyUp.bind(this)
+    this.listen()
+  }
+  listen() {
+    ipcRenderer.on(
+      'slackmessage',
+      (e: EventListenerObject, message: MessageEvent) => {
+        console.log(util.inspect(message))
+        this.props.store.messages.push(message)
+      },
+    )
   }
 
   handleOnClickChannel(id: string) {
@@ -76,6 +89,11 @@ class Viewer extends React.Component<any, any> {
                 handleOnClickChannel={this.handleOnClickChannel}
               />
             </div>
+            <ChatMessagesTree
+              messagesTree={store.messagesTree}
+              membersInfo={store.membersInfo}
+              channelsName={store.channelsName}
+            />
           </div>
         )}
       </Observer>

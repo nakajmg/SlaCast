@@ -1,0 +1,36 @@
+.ChatMessage {
+  display: flex;
+  margin-bottom: 1em;
+  text-shadow: 2px 2px 1px rgba(#000, 0.2), -2px 2px 1px rgba(#000, 0.2),
+    2px -2px 1px rgba(#000, 0.2), -2px -2px 1px rgba(#000, 0.2);
+  background-color: rgba(0, 0, 0, 0);
+  &_Avatar {
+    width: 4em;
+    height: 4em;
+    min-width: 4em;
+    img {
+      border-radius: 2px;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    margin-right: 0.3em;
+  }
+  &_NameAndTS {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2em;
+  }
+  &_Name {
+    font-size: 1.2em;
+  }
+  &_TS {
+    font-size: 1.2em;
+    margin-left: 0.4em;
+  }
+  &_Body {
+    font-size: 1.5em;
+    padding: 1px 3px;
+  }
+}

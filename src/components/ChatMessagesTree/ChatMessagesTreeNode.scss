@@ -1,0 +1,10 @@
+.ChatMessagesTreeNode {
+  // v8のバグ対策
+  background-color: rgba(0, 0, 0, 0);
+  &_Thread {
+    padding-left: 4em;
+  }
+  &_ThreadMessage {
+    font-size: 0.8em;
+  }
+}
