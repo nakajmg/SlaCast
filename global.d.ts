@@ -2150,6 +2150,13 @@ declare module '@slack/client' {
       unread_count: number
       ts: string
     }
+    file?: any
+    upload?: boolean
+    display_as_bot?: boolean
+    username?: string
+    bot_id?: string | any
+    user_team?: string
+    user_profile?: any
   }
 
   interface ReactionEvent {
