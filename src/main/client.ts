@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, shell } from 'electron'
 const isDevelopment: boolean = process.env.NODE_ENV !== 'production'
 import * as path from 'path'
 import { format as formatURL } from 'url'
@@ -35,6 +35,18 @@ function createClientWindow() {
     setImmediate(() => {
       window.focus()
     })
+  })
+
+  window.webContents.on('will-navigate', (e, url) => {
+    if (/^http:\/\/localhost/.test(url)) return
+    if (/^https:\/\/.*?slack.com\/oauth\//.test(url)) return
+    if (
+      /^https:\/\/us-central1-slack-user-status\.cloudfunctions.net\//.test(url)
+    )
+      return
+    if (/^file:\/\//.test(url)) return
+    e.preventDefault()
+    shell.openExternal(url)
   })
 
   return window

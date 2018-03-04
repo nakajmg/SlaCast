@@ -6,6 +6,7 @@ import storage from '../modules/storage'
 import createClientWindow from './client'
 import createSigninWindow from './signin'
 import events from '../modules/events'
+import { RTM_EVENTS } from '@slack/client'
 
 let clientWindow: BrowserWindow | null
 let signinWindow: BrowserWindow | null
@@ -55,8 +56,8 @@ function openSignin() {
 function connectRtm(token: string) {
   if (rtm) return
   rtm = new SlackRtmClient(token)
-  rtm.on('message', (message: MessageEvent) => {
+  rtm.on(RTM_EVENTS.MESSAGE, (message: MessageEvent) => {
     if (!clientWindow) return
-    clientWindow.webContents.send('slackmessage', message)
+    clientWindow.webContents.send(events.SLACK_MESSAGE, message)
   })
 }
