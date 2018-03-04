@@ -26,16 +26,8 @@ class Store {
       this.channels.replace(await this.webClient._fetchChannels()),
       this.members.replace(await this.webClient._fetchMembers()),
     ])
+    require('./_mock.js').forEach((message: any) => this.messages.push(message))
     this.initialized = true
-    this.messages.push({
-      channel: 'C9FLVQ03Z',
-      source_team: 'T029ECUDJ',
-      team: 'T029ECUDJ',
-      text: 'hogehoge',
-      ts: '1520147856.000039',
-      type: 'message',
-      user: 'U029ECUDL',
-    })
   }
 
   // storageから設定を復元
