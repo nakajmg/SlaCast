@@ -1,6 +1,6 @@
 import SlackWebClient from '../slack/Web'
-import { observable, computed, IObservableArray } from 'mobx'
-import { zipObject, map, filter, reduce, each } from 'lodash'
+import { observable, computed, IObservableArray, action } from 'mobx'
+import { zipObject, map, filter, reduce, each, findIndex } from 'lodash'
 import {
   PartialChannelResult,
   FullUserResult,
@@ -28,6 +28,22 @@ class Store {
     ])
     require('./_mock.js').forEach((message: any) => this.messages.push(message))
     this.initialized = true
+  }
+
+  @action.bound
+  deleteMessage(message: MessageEvent) {
+    const index = findIndex(this.messages, ({ ts }) => ts === message.ts)
+    if (index) {
+      this.messages.splice(index, 1)
+    }
+  }
+  @action.bound
+  updateMessage(message: MessageEvent, newMessage: MessageEvent) {
+    const index = findIndex(this.messages, ({ ts }) => ts === message.ts)
+    debugger
+    if (index) {
+      this.messages.splice(index, 1, { ...this.messages[6], ...newMessage })
+    }
   }
 
   // storageから設定を復元

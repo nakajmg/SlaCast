@@ -2157,6 +2157,7 @@ declare module '@slack/client' {
     bot_id?: string | any
     user_team?: string
     user_profile?: any
+    previous_message: any
   }
 
   interface ReactionEvent {

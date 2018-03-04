@@ -27,7 +27,7 @@ class Viewer extends React.Component<any, any> {
     this.handleOnKeyUp = this.handleOnKeyUp.bind(this)
     this.listen()
     reaction(
-      () => this.props.store.messages.length,
+      () => this.props.store.channelMessages.length,
       (data, reaction) => {
         const messages = this.messagesTree.querySelector('div')
         if (messages) {
@@ -43,9 +43,19 @@ class Viewer extends React.Component<any, any> {
     ipcRenderer.on(
       events.SLACK_MESSAGE,
       (e: EventListenerObject, message: MessageEvent) => {
-        console.log(util.inspect(message))
+        const store = this.props.store
+        if (message.subtype) {
+          switch (message.subtype) {
+            case 'message_deleted':
+              return store.deleteMessage(message.previous_message)
+            case 'message_changed':
+              return store.updateMessage(
+                message.previous_message,
+                message.message,
+              )
+          }
+        }
         this.props.store.messages.push(message)
-        // this.props.store.messages.splice(0, 0, message)
       },
     )
   }
