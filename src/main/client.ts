@@ -5,8 +5,8 @@ import { format as formatURL } from 'url'
 
 function createClientWindow() {
   const window = new BrowserWindow({
-    width: 640,
-    height: 480,
+    width: 300,
+    height: 600,
     frame: false,
     transparent: true,
     alwaysOnTop: true,

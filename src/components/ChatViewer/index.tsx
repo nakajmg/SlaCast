@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './ChatViewer.scss'
 import { Observer, inject } from 'mobx-react'
-import { computed, observable } from 'mobx'
+import { computed, observable, intercept, reaction } from 'mobx'
 import { filter } from 'lodash'
 import events from '../../modules/events'
 import { PartialChannelResult, MessageEvent } from '@slack/client'
@@ -17,7 +17,7 @@ class Viewer extends React.Component<any, any> {
   @observable channelsFilter: string = ''
   @observable channelListVisiblity: boolean = false
   className: string = 'ChatViewer'
-  constructor(props: any) {
+  constructor(props: any, private messagesTree: HTMLElement) {
     super(props)
     this.handleOnClickChannel = this.handleOnClickChannel.bind(this)
     this.handleOnInputFilter = this.handleOnInputFilter.bind(this)
@@ -26,6 +26,18 @@ class Viewer extends React.Component<any, any> {
     )
     this.handleOnKeyUp = this.handleOnKeyUp.bind(this)
     this.listen()
+    reaction(
+      () => this.props.store.messages.length,
+      (data, reaction) => {
+        const messages = this.messagesTree.querySelector('div')
+        if (messages) {
+          this.messagesTree.scrollTop = messages.offsetHeight
+        }
+      },
+      {
+        delay: 100,
+      },
+    )
   }
   listen() {
     ipcRenderer.on(
@@ -71,31 +83,38 @@ class Viewer extends React.Component<any, any> {
       <Observer>
         {() => (
           <div className={this.className}>
-            <ChannelName
-              currentChannelName={store.currentChannelName}
-              handleOnClick={this.toggleChannelListVisibility}
-            />
-            <div
-              className={`${this.className}_ChannelList`}
-              style={{
-                display: !this.channelListVisiblity ? 'none' : '',
-              }}
-            >
-              <ChannelFilter
-                handleOnInputFilter={this.handleOnInputFilter}
-                handleOnKeyUp={this.handleOnKeyUp}
-                filterValue={this.channelsFilter}
+            <div className={`${this.className}_Header`}>
+              <ChannelName
+                currentChannelName={store.currentChannelName}
+                handleOnClick={this.toggleChannelListVisibility}
               />
-              <ChannelList
-                channels={this.channels}
-                handleOnClickChannel={this.handleOnClickChannel}
+              <div
+                className={`${this.className}_ChannelList`}
+                style={{
+                  display: !this.channelListVisiblity ? 'none' : '',
+                }}
+              >
+                <ChannelFilter
+                  handleOnInputFilter={this.handleOnInputFilter}
+                  handleOnKeyUp={this.handleOnKeyUp}
+                  filterValue={this.channelsFilter}
+                />
+                <ChannelList
+                  channels={this.channels}
+                  handleOnClickChannel={this.handleOnClickChannel}
+                />
+              </div>
+            </div>
+            <div
+              className={`${this.className}_Chat`}
+              ref={(el: any) => (this.messagesTree = el)}
+            >
+              <ChatMessagesTree
+                messagesTree={store.messagesTree}
+                membersInfo={store.membersInfo}
+                channelsName={store.channelsName}
               />
             </div>
-            <ChatMessagesTree
-              messagesTree={store.messagesTree}
-              membersInfo={store.membersInfo}
-              channelsName={store.channelsName}
-            />
           </div>
         )}
       </Observer>

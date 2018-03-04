@@ -4,9 +4,9 @@ import { map } from 'lodash'
 import ChatMessagesTreeNode from './ChatMessagesTreeNode'
 
 const className = 'ChatMessagesTree'
-function ChatMessagesTree({ messagesTree, membersInfo }: any) {
+function ChatMessagesTree({ messagesTree, membersInfo, treeRef }: any) {
   return (
-    <div className={className}>
+    <div className={className} ref={treeRef}>
       {map(messagesTree, ({ message, _thread }: any) => (
         <ChatMessagesTreeNode
           message={message}
