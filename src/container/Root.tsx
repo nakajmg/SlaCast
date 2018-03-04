@@ -1,28 +1,8 @@
 import * as React from 'react'
 import store from '../modules/Store'
 import storage from '../modules/storage'
-import { Observer, Provider, observer, inject } from 'mobx-react'
+import { Observer, Provider } from 'mobx-react'
 import ChatViewer from '../components/ChatViewer/index'
-
-@inject('store')
-@observer
-class Component extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props)
-  }
-  render() {
-    const store = this.props.store
-    return (
-      <Observer>
-        {() => (
-          <div>
-            {!store.initialized ? <div>...initializing</div> : <ChatViewer />}
-          </div>
-        )}
-      </Observer>
-    )
-  }
-}
 
 declare global {
   interface Window {
@@ -39,7 +19,13 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Component />
+        <Observer>
+          {() => (
+            <div>
+              {!store.initialized ? <div>...initializing</div> : <ChatViewer />}
+            </div>
+          )}
+        </Observer>
       </Provider>
     )
   }
