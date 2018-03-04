@@ -1,8 +1,12 @@
 import * as React from 'react'
+import './ChannelName.scss'
 
-function ChannelName({ currentChannelName }: any) {
+const className = 'ChannelName'
+function ChannelName({ currentChannelName, handleOnClick }: any) {
   return (
-    <div>#{currentChannelName ? currentChannelName : 'choose channel'}</div>
+    <div className={className} onClick={handleOnClick}>
+      # {currentChannelName ? currentChannelName : 'choose channel'}
+    </div>
   )
 }
 

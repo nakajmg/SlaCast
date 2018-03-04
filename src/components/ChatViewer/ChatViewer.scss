@@ -1,0 +1,12 @@
+.ChatViewer {
+  display: flex;
+  flex-direction: column;
+  font-size: 62.5%;
+  font-family: sans-serif;
+  background-color: transparent;
+  position: relative;
+  &_ChannelList {
+    position: absolute;
+    top: 0;
+  }
+}

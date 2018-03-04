@@ -7,9 +7,11 @@ function createClientWindow() {
   const window = new BrowserWindow({
     width: 640,
     height: 480,
-    // frame: false,
-    // transparent: true,
+    frame: false,
+    transparent: true,
     alwaysOnTop: true,
+    x: 0,
+    y: 0,
   })
 
   if (isDevelopment) {

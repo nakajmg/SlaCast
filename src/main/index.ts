@@ -17,15 +17,6 @@ app.on('window-all-closed', () => {
   }
 })
 
-// app.on('activate', () => {
-//   if (clientWindow === null) {
-//     clientWindow = createClientWindow()
-//     clientWindow.on('closed', () => {
-//       clientWindow = null
-//     })
-//   }
-// })
-
 app.on('ready', async () => {
   // await storage.clear() // for debug
   const token: any = await storage.get(storage.keys.CLIENT_TOKEN)

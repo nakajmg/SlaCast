@@ -1,13 +1,19 @@
 import * as React from 'react'
 import { map } from 'lodash'
 import { PartialChannelResult } from '@slack/client'
+import './ChannelList.scss'
 
+const className = 'ChannelList'
 function ChannelList({ channels, handleOnClickChannel }: any) {
   return (
-    <div>
+    <div className={className}>
       {map(channels, ({ name, id }: PartialChannelResult) => (
-        <div key={id} onClick={() => handleOnClickChannel(id)}>
-          {name}:({id})
+        <div
+          className={`${className}_Channel`}
+          key={id}
+          onClick={() => handleOnClickChannel(id)}
+        >
+          {name}
         </div>
       ))}
     </div>
