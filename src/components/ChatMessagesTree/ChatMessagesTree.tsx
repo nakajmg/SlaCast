@@ -1,4 +1,5 @@
 import * as React from 'react'
+import './ChatMessagesTree.scss'
 import { map } from 'lodash'
 import ChatMessagesTreeNode from './ChatMessagesTreeNode'
 

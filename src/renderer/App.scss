@@ -6,8 +6,11 @@ body {
   padding: 0;
   margin: 0 auto;
   user-select: none;
-  border-top: 1px dashed rgba(0, 0, 0, 0.3);
+  // border-top: 1px dashed rgba(0, 0, 0, 0.3);
+  // border-right: 1px dashed rgba(0, 0, 0, 0.3);
+  border: 1px dashed rgba(0, 0, 0, 0.1);
   // -webkit-text-stroke: 0.4px rgba(255, 255, 255, 1);
   color: #fff;
   box-sizing: border-box;
+  transform: translate3d(0, 0, 0);
 }
