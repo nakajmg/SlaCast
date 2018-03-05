@@ -8,6 +8,7 @@ function ChatMessagesTreeNode({
   _thread,
   membersInfo,
   reactions,
+  emojis,
 }: any) {
   return (
     <div className={className}>
@@ -15,6 +16,7 @@ function ChatMessagesTreeNode({
         message={message}
         membersInfo={membersInfo}
         reactions={reactions}
+        emojis={emojis}
       />
       <div className={`${className}_Thread`}>
         {map(_thread, (message: any) => (
@@ -24,6 +26,7 @@ function ChatMessagesTreeNode({
             key={message.ts}
             membersInfo={membersInfo}
             reactions={reactions}
+            emojis={emojis}
           />
         ))}
       </div>

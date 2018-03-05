@@ -58,4 +58,21 @@
     font-size: 0.9em;
     margin: 0;
   }
+  &_Reactions {
+    display: flex;
+    padding: 2px;
+  }
+  &_Reaction,
+  &_CustomReaction {
+    margin-right: 3px;
+    border-radius: 2px;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      display: block;
+    }
+  }
 }

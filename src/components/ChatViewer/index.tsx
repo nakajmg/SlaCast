@@ -68,6 +68,11 @@ class Viewer extends React.Component<any, any> {
       events.SLACK_REACTION_ADDED,
       (e: EventListenerObject, reaction: ReactionEvent) => {
         const store = this.props.store
+        if (reaction.reaction.indexOf('::') !== -1) {
+          let [_reaction] = reaction.reaction.split('')
+          store.reactions.push({ ...reaction, reaction: _reaction })
+          return
+        }
         store.reactions.push(reaction)
       },
     )
@@ -155,6 +160,7 @@ class Viewer extends React.Component<any, any> {
                 membersInfo={store.membersInfo}
                 channelsName={store.channelsName}
                 reactions={store.reactions}
+                emojis={store.emojis}
               />
             </div>
             <div className={`${this.className}_Sender`}>

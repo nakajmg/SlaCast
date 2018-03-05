@@ -22,12 +22,14 @@ class Store {
   @observable reactions: IObservableArray<ReactionEvent> = observable([])
   @observable subscribedChannels: IObservableArray<Object> = observable([])
   @observable preferences: any = {}
+  @observable emojis: IObservableArray<any> = observable([])
 
   async initialize(token: string) {
     this.webClient = new SlackWebClient(token)
     await Promise.all([
       this.channels.replace(await this.webClient._fetchChannels()),
       this.members.replace(await this.webClient._fetchMembers()),
+      this.emojis.replace(await this.webClient._fetchEmojiList()),
     ])
     require('./_mock.js').forEach((message: any) => this.messages.push(message))
     this.reactions.push({

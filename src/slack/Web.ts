@@ -4,11 +4,6 @@ import {
   ChatPostMessageParams,
 } from '@slack/client'
 
-interface Emoji {
-  key: string
-  url: string
-}
-
 class SlackWebClient {
   client: WebClient
   constructor(public token: string) {
@@ -20,7 +15,7 @@ class SlackWebClient {
   async _fetchEmojiList() {
     const res: WebApiResultAny = await this.client.emoji.list()
     if (!res.ok) return []
-    return Object.keys(res.emoji).map((key: string): Emoji => {
+    return Object.keys(res.emoji).map((key: string) => {
       const url = res.emoji[key]
       return { key, url }
     })

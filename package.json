@@ -34,10 +34,12 @@
   },
   "dependencies": {
     "@slack/client": "^3.16.0",
+    "@types/emoji-mart": "^2.2.1",
     "@types/markdown-it": "0.0.4",
     "axios": "^0.18.0",
     "date-fns": "^1.29.0",
     "electron-json-storage": "^4.0.2",
+    "emoji-mart": "^2.5.0",
     "lodash": "^4.17.5",
     "markdown-it": "^8.4.1",
     "mobx": "^3.5.1",
