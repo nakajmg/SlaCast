@@ -1,5 +1,5 @@
 import SlackWebClient from '../slack/Web'
-import { observable, computed, IObservableArray, action } from 'mobx'
+import { observable, computed, IObservableArray, action, reaction } from 'mobx'
 import { zipObject, map, filter, reduce, each, findIndex } from 'lodash'
 import {
   PartialChannelResult,
@@ -30,6 +30,12 @@ class Store {
     ])
     require('./_mock.js').forEach((message: any) => this.messages.push(message))
     await this.restoreFromStorage()
+    reaction(
+      () => this.preferences,
+      () => {
+        this.saveToStorage()
+      },
+    )
     this.initialized = true
   }
 
