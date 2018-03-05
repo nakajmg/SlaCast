@@ -15,12 +15,14 @@ import ChannelName from './ChannelName'
 import ThemeSwitcher from './ThemeSwitcher'
 import ChatMessagesTree from '../ChatMessagesTree/ChatMessagesTree'
 import MessageSender from '../MessageSender/index'
+import Preferences from '../Preferences'
 import { ipcRenderer } from 'electron'
 
 @inject('store')
 class Viewer extends React.Component<any, any> {
   @observable channelsFilter: string = ''
   @observable channelListVisiblity: boolean = false
+  @observable preferencesVisibility: boolean = false
   className: string = 'ChatViewer'
   constructor(props: any, private messagesTree: HTMLElement) {
     super(props)
@@ -31,6 +33,7 @@ class Viewer extends React.Component<any, any> {
     )
     this.handleOnKeyUp = this.handleOnKeyUp.bind(this)
     this.toggleTheme = this.toggleTheme.bind(this)
+    this.togglePreference = this.togglePreference.bind(this)
     this.listen()
     reaction(
       () => this.props.store.channelMessages.length,
@@ -119,6 +122,10 @@ class Viewer extends React.Component<any, any> {
       ({ name }: PartialChannelResult) => !!~name.indexOf(this.channelsFilter),
     )
   }
+
+  togglePreference() {
+    this.preferencesVisibility = !this.preferencesVisibility
+  }
   render() {
     const store = this.props.store
     return (
@@ -165,6 +172,19 @@ class Viewer extends React.Component<any, any> {
             </div>
             <div className={`${this.className}_Sender`}>
               <MessageSender />
+            </div>
+            <div
+              className={`${this.className}_Preferences ${
+                !this.preferencesVisibility ? '_hidden' : ''
+              }`}
+            >
+              <Preferences />
+            </div>
+            <div
+              className={`${this.className}_TogglePreferences`}
+              onClick={this.togglePreference}
+            >
+              ⚙
             </div>
           </div>
         )}

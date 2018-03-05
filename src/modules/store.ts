@@ -8,6 +8,8 @@ import {
   ReactionEvent,
 } from '@slack/client'
 import storage from './storage'
+import { ipcRenderer } from 'electron'
+import events from './events'
 
 interface INameMap {
   [key: string]: string
@@ -48,8 +50,10 @@ class Store {
     await this.restoreFromStorage()
     reaction(
       () => this.preferences,
-      () => {
-        this.saveToStorage()
+      async () => {
+        await this.saveToStorage()
+        console.log(events.SET_ALWAYS_ON_TOP)
+        ipcRenderer.send(events.SET_ALWAYS_ON_TOP, this.preferences)
       },
     )
     this.postMessage = this.postMessage.bind(this)

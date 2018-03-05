@@ -40,4 +40,27 @@
       background-color: rgba(lightcyan, 0.2);
     }
   }
+  &_Preferences {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  &_TogglePreferences {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.4;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  ._hidden {
+    display: none;
+  }
 }

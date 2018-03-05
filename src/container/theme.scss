@@ -1,9 +1,28 @@
 .ThemeDark {
+  height: 100%;
+  box-sizing: border-box;
   color: #000;
-  border-color: inherit;
+  border-color: rgba(#000, 0.2);
+  border-style: dashed;
+  border-width: 0;
+  position: relative;
+  &:before {
+    position: absolute;
+    z-index: 0;
+    background-color: #fff;
+    opacity: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 }
 
 .ThemeLight {
+  height: 100%;
+  box-sizing: border-box;
   color: #fff;
-  border-color: inherit;
+  border-color: rgba(#fff, 0.2);
+  border-style: dashed;
+  border-width: 0;
 }

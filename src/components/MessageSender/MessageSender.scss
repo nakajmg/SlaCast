@@ -1,6 +1,12 @@
 .MessageSender {
   box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+  &.Dark {
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+  &.Light {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
   &_Input {
     color: inherit;
     width: 100%;

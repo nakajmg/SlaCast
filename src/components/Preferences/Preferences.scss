@@ -1,0 +1,35 @@
+.Preferences {
+  font-size: 1.4em;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1em;
+  &.Dark {
+    background-color: rgba(#0e0e0e, 0.9);
+    color: #f2f2f2;
+  }
+  &.Light {
+    background-color: rgba(#f2f2f2, 0.9);
+    color: #0e0e0e;
+  }
+  &_Heading {
+    font-weight: 600;
+    margin-bottom: 1em;
+    font-size: 1.3em;
+  }
+  &_Item {
+    margin-bottom: 1em;
+  }
+  &_Label {
+    margin-bottom: 0.5em;
+  }
+  &_Input {
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 2em;
+    text-align: center;
+    padding: 5px;
+  }
+}

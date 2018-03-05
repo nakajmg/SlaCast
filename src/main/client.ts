@@ -1,7 +1,8 @@
-import { BrowserWindow, shell } from 'electron'
+import { BrowserWindow, shell, ipcMain } from 'electron'
 const isDevelopment: boolean = process.env.NODE_ENV !== 'production'
 import * as path from 'path'
 import { format as formatURL } from 'url'
+import events from '../modules/events'
 
 function createClientWindow() {
   const window = new BrowserWindow({
@@ -49,6 +50,12 @@ function createClientWindow() {
     shell.openExternal(url)
   })
 
+  ipcMain.on(
+    events.SET_ALWAYS_ON_TOP,
+    (e: EventListenerObject, preferences: any) => {
+      window.setAlwaysOnTop(preferences.alwaysOnTop)
+    },
+  )
   return window
 }
 

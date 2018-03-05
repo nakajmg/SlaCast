@@ -22,7 +22,12 @@ class Root extends React.Component {
       <Provider store={store}>
         <Observer>
           {() => (
-            <div className={`Theme${store.preferences.theme}`}>
+            <div
+              className={`Theme${store.preferences.theme}`}
+              style={{
+                borderWidth: store.preferences.border ? '1px' : '0',
+              }}
+            >
               {!store.initialized ? <div>...initializing</div> : <ChatViewer />}
             </div>
           )}

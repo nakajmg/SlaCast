@@ -1,7 +1,9 @@
 import * as React from 'react'
 import './MessageSender.scss'
 import store from '../../modules/Store'
+import { observer } from 'mobx-react'
 
+@observer
 class MessageSender extends React.Component {
   constructor(props: any) {
     super(props)
@@ -21,7 +23,10 @@ class MessageSender extends React.Component {
   }
   render() {
     return (
-      <div className={this.className}>
+      <div
+        className={`${this.className} ${store.preferences.theme}`}
+        style={{ borderWidth: store.preferences.border ? '1px' : '0' }}
+      >
         <textarea
           className={`${this.className}_Input`}
           onKeyUp={(e: any) => this.onKeyUp(e)}
