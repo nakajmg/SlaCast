@@ -6,6 +6,7 @@ import {
   FullUserResult,
   MessageEvent,
 } from '@slack/client'
+import storage from './storage'
 
 interface INameMap {
   [key: string]: string
@@ -19,6 +20,7 @@ class Store {
   @observable members: IObservableArray<FullUserResult> = observable([])
   @observable channels: IObservableArray<PartialChannelResult> = observable([])
   @observable subscribedChannels: IObservableArray<Object> = observable([])
+  @observable preferences: object = {}
 
   async initialize(token: string) {
     this.webClient = new SlackWebClient(token)
@@ -27,6 +29,7 @@ class Store {
       this.members.replace(await this.webClient._fetchMembers()),
     ])
     require('./_mock.js').forEach((message: any) => this.messages.push(message))
+    await this.restoreFromStorage()
     this.initialized = true
   }
 
@@ -40,17 +43,22 @@ class Store {
   @action.bound
   updateMessage(message: MessageEvent, newMessage: MessageEvent) {
     const index = findIndex(this.messages, ({ ts }) => ts === message.ts)
-    debugger
     if (index) {
       this.messages.splice(index, 1, { ...this.messages[6], ...newMessage })
     }
   }
 
   // storageから設定を復元
-  async restoreFromStorage() {}
+  async restoreFromStorage() {
+    const preferences = await storage.get(storage.keys.PREFERENCES)
+
+    Object.assign(this.preferences, preferences)
+  }
 
   // storageに設定を保存
-  async saveToStorage() {}
+  async saveToStorage() {
+    await storage.set(storage.keys.PREFERENCES, this.preferences)
+  }
 
   @computed
   get channelsName(): INameMap {

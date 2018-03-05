@@ -1,6 +1,7 @@
 .ChatMessage {
   display: flex;
   margin-bottom: 1em;
+  box-sizing: border-box;
   // text-shadow: 2px 2px 1px rgba(#000, 0.2), -2px 2px 1px rgba(#000, 0.2),
   // 2px -2px 1px rgba(#000, 0.2), -2px -2px 1px rgba(#000, 0.2);
   background-color: rgba(0, 0, 0, 0);

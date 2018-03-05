@@ -1,4 +1,5 @@
 import * as React from 'react'
+import './theme.scss'
 import store from '../modules/Store'
 import storage from '../modules/storage'
 import { Observer, Provider } from 'mobx-react'
@@ -21,7 +22,7 @@ class Root extends React.Component {
       <Provider store={store}>
         <Observer>
           {() => (
-            <div>
+            <div className={`Theme${store.preferences.theme}`}>
               {!store.initialized ? <div>...initializing</div> : <ChatViewer />}
             </div>
           )}

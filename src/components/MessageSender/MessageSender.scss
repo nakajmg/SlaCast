@@ -1,0 +1,17 @@
+.MessageSender {
+  box-sizing: border-box;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  &_Input {
+    width: 100%;
+    padding: 5px;
+    margin: 0;
+    font-size: 1.6em;
+    box-sizing: border-box;
+    border-radius: 0;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    &:focus {
+      outline: none;
+    }
+  }
+}

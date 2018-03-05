@@ -1,16 +1,17 @@
 import * as React from 'react'
 import './ChatViewer.scss'
 import { Observer, inject } from 'mobx-react'
-import { computed, observable, intercept, reaction } from 'mobx'
+import { computed, observable, reaction } from 'mobx'
 import { filter } from 'lodash'
 import events from '../../modules/events'
 import { PartialChannelResult, MessageEvent } from '@slack/client'
 import ChannelList from './ChannelList'
 import ChannelFilter from './ChannelFilter'
 import ChannelName from './ChannelName'
+import ThemeSwitcher from './ThemeSwitcher'
 import ChatMessagesTree from '../ChatMessagesTree/ChatMessagesTree'
+import MessageSender from '../MessageSender/index'
 import { ipcRenderer } from 'electron'
-import util from 'util'
 
 @inject('store')
 class Viewer extends React.Component<any, any> {
@@ -25,6 +26,7 @@ class Viewer extends React.Component<any, any> {
       this,
     )
     this.handleOnKeyUp = this.handleOnKeyUp.bind(this)
+    this.toggleTheme = this.toggleTheme.bind(this)
     this.listen()
     reaction(
       () => this.props.store.channelMessages.length,
@@ -74,6 +76,14 @@ class Viewer extends React.Component<any, any> {
   toggleChannelListVisibility() {
     this.channelListVisiblity = !this.channelListVisiblity
   }
+  toggleTheme() {
+    const theme =
+      this.props.store.preferences.theme === 'Light' ? 'Dark' : 'Light'
+    this.props.store.preferences = {
+      ...this.props.store.preferences,
+      theme,
+    }
+  }
   _resetChannelsFilter() {
     this.channelsFilter = ''
     this.channelListVisiblity = false
@@ -94,6 +104,10 @@ class Viewer extends React.Component<any, any> {
         {() => (
           <div className={this.className}>
             <div className={`${this.className}_Header`}>
+              <ThemeSwitcher
+                theme={store.preferences.theme}
+                handleToggleTheme={this.toggleTheme}
+              />
               <ChannelName
                 currentChannelName={store.currentChannelName}
                 handleOnClick={this.toggleChannelListVisibility}
@@ -124,6 +138,9 @@ class Viewer extends React.Component<any, any> {
                 membersInfo={store.membersInfo}
                 channelsName={store.channelsName}
               />
+            </div>
+            <div className={`${this.className}_Sender`}>
+              <MessageSender />
             </div>
           </div>
         )}

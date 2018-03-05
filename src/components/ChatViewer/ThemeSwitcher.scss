@@ -1,0 +1,17 @@
+.ThemeSwitcher {
+  box-sizing: border-box;
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 3px;
+  cursor: pointer;
+  &.Light {
+    border: 1px solid rgba(#000, 0.5);
+    border-radius: 2px;
+    background-color: #fff;
+  }
+  &.Dark {
+    border: 1px solid rgba(#fff, 0.5);
+    border-radius: 2px;
+    background-color: #000;
+  }
+}

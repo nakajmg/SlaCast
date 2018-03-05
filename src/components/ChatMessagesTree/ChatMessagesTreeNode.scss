@@ -2,6 +2,7 @@
   // v8のバグ対策
   background-color: rgba(0, 0, 0, 0);
   padding: 5px;
+  box-sizing: border-box;
   &_Thread {
     padding-left: 4em;
   }

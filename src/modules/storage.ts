@@ -3,7 +3,7 @@ import { isEqual } from 'lodash'
 
 const keys = {
   CLIENT_TOKEN: 'clientToken',
-  PREFERENCE: 'preference',
+  PREFERENCES: 'preferences',
 }
 
 const get = (key: string) => {

@@ -37,7 +37,17 @@ ipcMain.on(events.RECEIVE_SLACK_TOKEN, async (e: Event, query: any) => {
   connectRtm(query.token)
 })
 
-function openClient() {
+const defaultPreferences = {
+  theme: 'Light',
+  alwaysOnTop: false,
+  backgroundOpacity: 0,
+}
+
+async function openClient() {
+  const preferences = await storage.get(storage.keys.PREFERENCES)
+  if (!preferences) {
+    await storage.set(storage.keys.PREFERENCES, defaultPreferences)
+  }
   if (clientWindow) return
   clientWindow = createClientWindow()
   clientWindow.on('closed', () => {
