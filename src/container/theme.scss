@@ -6,16 +6,6 @@
   border-style: dashed;
   border-width: 0;
   position: relative;
-  &:before {
-    position: absolute;
-    z-index: 0;
-    background-color: #fff;
-    opacity: 1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
 }
 
 .ThemeLight {

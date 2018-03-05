@@ -132,6 +132,12 @@ class Viewer extends React.Component<any, any> {
       <Observer>
         {() => (
           <div className={this.className}>
+            <div
+              className={`${this.className}_BG ${store.preferences.theme}`}
+              style={{
+                opacity: store.preferences.backgroundOpacity,
+              }}
+            />
             <div className={`${this.className}_Header`}>
               <ThemeSwitcher
                 theme={store.preferences.theme}
