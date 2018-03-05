@@ -39,7 +39,7 @@ ipcMain.on(events.RECEIVE_SLACK_TOKEN, async (e: Event, query: any) => {
 
 const defaultPreferences = {
   theme: 'Light',
-  alwaysOnTop: false,
+  alwaysOnTop: true,
   backgroundOpacity: 0,
   border: true,
   currentChannel: '',

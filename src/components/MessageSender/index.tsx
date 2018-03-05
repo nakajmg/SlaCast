@@ -1,6 +1,7 @@
 import * as React from 'react'
 import './MessageSender.scss'
 import store from '../../modules/Store'
+import replaceMention from '../../modules/replaceMention'
 import { observer } from 'mobx-react'
 import { Picker, EmojiData } from 'emoji-mart'
 import { observable } from 'mobx'
@@ -23,7 +24,8 @@ class MessageSender extends React.Component {
     e.stopPropagation()
     if (e.key === 'Enter' && this.isPressed && !e.shiftKey) {
       if (e.target.value.trim() !== '') {
-        store.postMessage({ message: e.target.value })
+        const message = replaceMention(e.target.value, store.membersInfo)
+        store.postMessage({ message })
         e.target.value = ''
       }
     }

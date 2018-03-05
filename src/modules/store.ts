@@ -33,20 +33,6 @@ class Store {
       this.members.replace(await this.webClient._fetchMembers()),
       this.emojis.replace(await this.webClient._fetchEmojiList()),
     ])
-    require('./_mock.js').forEach((message: any) => this.messages.push(message))
-    this.reactions.push({
-      type: 'reaction_added',
-      user: 'U029ECUDL',
-      item: {
-        type: 'message',
-        channel: 'C9FLVQ03Z',
-        ts: '1520221185.000121',
-      },
-      reaction: 'joy',
-      item_user: 'U029ECUDL',
-      event_ts: '1520221202.000085',
-      ts: '1520221202.000085',
-    })
     await this.restoreFromStorage()
     reaction(
       () => this.preferences,

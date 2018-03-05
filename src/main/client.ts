@@ -6,7 +6,7 @@ import events from '../modules/events'
 
 function createClientWindow() {
   const window = new BrowserWindow({
-    width: 300,
+    width: 350,
     height: 600,
     frame: false,
     transparent: true,
