@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import SlackRtmClient from '../slack/Rtm'
 // import env from '../../.env.js'
-import { MessageEvent } from '@slack/client'
+import { MessageEvent, ReactionEvent } from '@slack/client'
 import storage from '../modules/storage'
 import createClientWindow from './client'
 import createSigninWindow from './signin'
@@ -69,5 +69,13 @@ function connectRtm(token: string) {
   rtm.on(RTM_EVENTS.MESSAGE, (message: MessageEvent) => {
     if (!clientWindow) return
     clientWindow.webContents.send(events.SLACK_MESSAGE, message)
+  })
+  rtm.on(RTM_EVENTS.REACTION_ADDED, (reaction: ReactionEvent) => {
+    if (!clientWindow) return
+    clientWindow.webContents.send(events.SLACK_REACTION_ADDED, reaction)
+  })
+  rtm.on(RTM_EVENTS.REACTION_REMOVED, (reaction: ReactionEvent) => {
+    if (!clientWindow) return
+    clientWindow.webContents.send(events.SLACK_REACTION_REMOVED, reaction)
   })
 }

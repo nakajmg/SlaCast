@@ -5,6 +5,7 @@ import {
   PartialChannelResult,
   FullUserResult,
   MessageEvent,
+  ReactionEvent,
 } from '@slack/client'
 import storage from './storage'
 
@@ -19,6 +20,7 @@ class Store {
   @observable messages: IObservableArray<MessageEvent> = observable([])
   @observable members: IObservableArray<FullUserResult> = observable([])
   @observable channels: IObservableArray<PartialChannelResult> = observable([])
+  @observable reactions: IObservableArray<ReactionEvent> = observable([])
   @observable subscribedChannels: IObservableArray<Object> = observable([])
   @observable preferences: any = {}
 
@@ -29,6 +31,19 @@ class Store {
       this.members.replace(await this.webClient._fetchMembers()),
     ])
     require('./_mock.js').forEach((message: any) => this.messages.push(message))
+    this.reactions.push({
+      type: 'reaction_added',
+      user: 'U029ECUDL',
+      item: {
+        type: 'message',
+        channel: 'C9FLVQ03Z',
+        ts: '1520221185.000121',
+      },
+      reaction: 'joy',
+      item_user: 'U029ECUDL',
+      event_ts: '1520221202.000085',
+      ts: '1520221202.000085',
+    })
     await this.restoreFromStorage()
     reaction(
       () => this.preferences,
@@ -52,6 +67,14 @@ class Store {
     const index = findIndex(this.messages, ({ ts }) => ts === message.ts)
     if (index) {
       this.messages.splice(index, 1, { ...this.messages[6], ...newMessage })
+    }
+  }
+
+  @action.bound
+  removeReaction(reaction: ReactionEvent) {
+    const index = findIndex(this.reactions, ({ ts }) => ts === reaction.ts)
+    if (index) {
+      this.reactions.splice(index, 1)
     }
   }
 
@@ -116,7 +139,7 @@ class Store {
     const messagesTree = reduce(
       messages,
       (ret: any, message: MessageEvent): any => {
-        ret[message.ts] = { message, _thread: [] }
+        ret[message.ts] = { message, _thread: [], _reactions: [] }
         return ret
       },
       {},
@@ -124,6 +147,11 @@ class Store {
     each(replieMessages, message => {
       if (message.thread_ts && messagesTree[message.thread_ts]) {
         messagesTree[message.thread_ts]._thread.push(message)
+      }
+    })
+    each(this.reactions, reaction => {
+      if (reaction.item && reaction.item.ts && messagesTree[reaction.item.ts]) {
+        messagesTree[reaction.item.ts]._reactions.push(reaction)
       }
     })
     return messagesTree

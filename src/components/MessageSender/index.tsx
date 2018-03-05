@@ -1,7 +1,5 @@
 import * as React from 'react'
 import './MessageSender.scss'
-import { ipcRenderer } from 'electron'
-import { Provider } from 'mobx-react'
 import store from '../../modules/Store'
 
 class MessageSender extends React.Component {

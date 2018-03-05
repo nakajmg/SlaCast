@@ -4,7 +4,11 @@ import { Observer, inject } from 'mobx-react'
 import { computed, observable, reaction } from 'mobx'
 import { filter } from 'lodash'
 import events from '../../modules/events'
-import { PartialChannelResult, MessageEvent } from '@slack/client'
+import {
+  PartialChannelResult,
+  MessageEvent,
+  ReactionEvent,
+} from '@slack/client'
 import ChannelList from './ChannelList'
 import ChannelFilter from './ChannelFilter'
 import ChannelName from './ChannelName'
@@ -58,6 +62,19 @@ class Viewer extends React.Component<any, any> {
           }
         }
         this.props.store.messages.push(message)
+      },
+    )
+    ipcRenderer.on(
+      events.SLACK_REACTION_ADDED,
+      (e: EventListenerObject, reaction: ReactionEvent) => {
+        const store = this.props.store
+        store.reactions.push(reaction)
+      },
+    )
+    ipcRenderer.on(
+      events.SLACK_REACTION_REMOVED,
+      (e: EventListenerObject, reaction: ReactionEvent) => {
+        this.props.store.removeReaction(reaction)
       },
     )
   }
@@ -137,6 +154,7 @@ class Viewer extends React.Component<any, any> {
                 messagesTree={store.messagesTree}
                 membersInfo={store.membersInfo}
                 channelsName={store.channelsName}
+                reactions={store.reactions}
               />
             </div>
             <div className={`${this.className}_Sender`}>

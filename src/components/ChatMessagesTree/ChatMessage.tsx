@@ -4,9 +4,10 @@ import MI from 'markdown-it'
 const mdit = MI({ html: true, breaks: true })
 import tsToHHmmss from '../../modules/tsToHHmmss'
 import messageReplacer from '../../modules/messageReplacer'
+import { ReactionEvent } from '@slack/client'
 
 const _className = 'ChatMessage'
-function ChatMessage({ message, membersInfo, className }: any) {
+function ChatMessage({ message, membersInfo, className, reactions }: any) {
   const member = membersInfo[message.user]
   const messageText = messageReplacer({ message, membersInfo })
   return (
@@ -23,6 +24,15 @@ function ChatMessage({ message, membersInfo, className }: any) {
           className={`${_className}_Body`}
           dangerouslySetInnerHTML={{ __html: mdit.render(messageText) }}
         />
+        <div className={`${className}_Reactions`}>
+          {reactions
+            .filter(
+              (reaction: ReactionEvent) => reaction.item.ts === message.ts,
+            )
+            .map((reaction: ReactionEvent) => (
+              <div key={reaction.event_ts}>{reaction.reaction}</div>
+            ))}
+        </div>
       </div>
     </div>
   )

@@ -2163,9 +2163,9 @@ declare module '@slack/client' {
   interface ReactionEvent {
     type: 'reaction_added' | 'reaction_removed'
     user: string
-    userName: string
     reaction: string
     event_ts: string
+    item_user?: string
     value?: string
     item: {
       type: string
@@ -2174,6 +2174,7 @@ declare module '@slack/client' {
       file?: string
       file_comment?: string
     }
+    ts?: string
   }
 
   interface TeamDomainChangeEvent {

@@ -3,10 +3,19 @@ import './ChatMessagesTreeNode.scss'
 import { map } from 'lodash'
 import ChatMessage from './ChatMessage'
 const className = 'ChatMessagesTreeNode'
-function ChatMessagesTreeNode({ message, _thread, membersInfo }: any) {
+function ChatMessagesTreeNode({
+  message,
+  _thread,
+  membersInfo,
+  reactions,
+}: any) {
   return (
     <div className={className}>
-      <ChatMessage message={message} membersInfo={membersInfo} />
+      <ChatMessage
+        message={message}
+        membersInfo={membersInfo}
+        reactions={reactions}
+      />
       <div className={`${className}_Thread`}>
         {map(_thread, (message: any) => (
           <ChatMessage
@@ -14,6 +23,7 @@ function ChatMessagesTreeNode({ message, _thread, membersInfo }: any) {
             message={message}
             key={message.ts}
             membersInfo={membersInfo}
+            reactions={reactions}
           />
         ))}
       </div>

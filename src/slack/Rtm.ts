@@ -39,6 +39,14 @@ class SlackRtmClient extends EventEmitter {
       console.log(message)
       this.emit(RTM_EVENTS.MESSAGE, message)
     })
+    this.client.on(RTM_EVENTS.REACTION_ADDED, (message: MessageEvent) => {
+      console.log(message)
+      this.emit(RTM_EVENTS.REACTION_ADDED, message)
+    })
+    this.client.on(RTM_EVENTS.REACTION_REMOVED, (message: MessageEvent) => {
+      console.log(message)
+      this.emit(RTM_EVENTS.REACTION_REMOVED, message)
+    })
   }
 }
 
