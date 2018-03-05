@@ -17,7 +17,14 @@ class SlackWebClient {
     if (!res.ok) return []
     return Object.keys(res.emoji).map((name: string) => {
       const imageUrl = res.emoji[name]
-      return { name, imageUrl }
+      return {
+        name,
+        imageUrl,
+        short_names: [name],
+        text: '',
+        emoticons: [],
+        keywords: [name],
+      }
     })
   }
 
