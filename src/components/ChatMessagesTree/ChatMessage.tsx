@@ -5,7 +5,7 @@ const mdit = MI({ html: true, breaks: true })
 import tsToHHmmss from '../../modules/tsToHHmmss'
 import messageReplacer from '../../modules/messageReplacer'
 import { ReactionEvent } from '@slack/client'
-import { Emoji } from 'emoji-mart'
+import { emojify } from 'node-emoji'
 const _className = 'ChatMessage'
 
 function ChatMessage({
@@ -16,7 +16,8 @@ function ChatMessage({
   emojis,
 }: any) {
   const member = membersInfo[message.user]
-  const messageText = messageReplacer({ message, membersInfo })
+  const messageText = messageReplacer({ message, membersInfo, emojis })
+
   return (
     <div className={`${_className} ${className}`}>
       <div className={`${_className}_Avatar`}>
@@ -29,7 +30,9 @@ function ChatMessage({
         </div>
         <div
           className={`${_className}_Body`}
-          dangerouslySetInnerHTML={{ __html: mdit.render(messageText) }}
+          dangerouslySetInnerHTML={{
+            __html: mdit.render(messageText),
+          }}
         />
         <div className={`${_className}_Reactions`}>
           {reactions
@@ -38,25 +41,25 @@ function ChatMessage({
             )
             .map((reaction: ReactionEvent) => {
               const customEmoji = emojis.find(
-                ({ key, url }: { key: string; url: string }) => {
-                  return key === reaction.reaction
+                ({ name, imageUrl }: { name: string; imageUrl: string }) => {
+                  return name === reaction.reaction
                 },
               )
               return customEmoji ? (
-                <div className={`${_className}_CustomReaction`}>
-                  <img
-                    src={`${customEmoji.url}`}
-                    width="20"
-                    key={reaction.event_ts}
-                  />
+                <div
+                  className={`${_className}_CustomReaction`}
+                  key={reaction.event_ts}
+                  title={membersInfo[reaction.user].name}
+                >
+                  <img src={`${customEmoji.imageUrl}`} width="20" />
                 </div>
               ) : (
-                <div className={`${_className}_Reaction`}>
-                  <Emoji
-                    key={reaction.event_ts}
-                    emoji={reaction.reaction}
-                    size={20}
-                  />
+                <div
+                  className={`${_className}_Reaction`}
+                  key={reaction.event_ts}
+                  title={membersInfo[reaction.user].name}
+                >
+                  {emojify(`:${reaction.reaction}:`)}
                 </div>
               )
             })}

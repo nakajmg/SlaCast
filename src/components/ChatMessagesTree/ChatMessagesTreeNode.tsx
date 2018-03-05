@@ -23,7 +23,7 @@ function ChatMessagesTreeNode({
           <ChatMessage
             className={`${className}_ThreadMessage`}
             message={message}
-            key={message.ts}
+            key={`${message.ts}`}
             membersInfo={membersInfo}
             reactions={reactions}
             emojis={emojis}

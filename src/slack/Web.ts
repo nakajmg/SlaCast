@@ -15,9 +15,9 @@ class SlackWebClient {
   async _fetchEmojiList() {
     const res: WebApiResultAny = await this.client.emoji.list()
     if (!res.ok) return []
-    return Object.keys(res.emoji).map((key: string) => {
-      const url = res.emoji[key]
-      return { key, url }
+    return Object.keys(res.emoji).map((name: string) => {
+      const imageUrl = res.emoji[name]
+      return { name, imageUrl }
     })
   }
 

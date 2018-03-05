@@ -47,6 +47,8 @@
   p {
     margin: 0;
     word-break: break-all;
+    display: flex;
+    flex-wrap: wrap;
   }
   pre {
     text-shadow: none;
@@ -65,9 +67,11 @@
   &_Reaction,
   &_CustomReaction {
     margin-right: 3px;
-    border-radius: 2px;
-    width: 28px;
-    height: 28px;
+    border-radius: 7px;
+    background-color: rgba(lightcyan, 0.2);
+    font-size: 1.2em;
+    width: 1.5em;
+    height: 1.5em;
     display: inline-flex;
     justify-content: center;
     align-items: center;
