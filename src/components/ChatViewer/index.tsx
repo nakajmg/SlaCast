@@ -80,7 +80,7 @@ class Viewer extends React.Component<any, any> {
   }
 
   handleOnClickChannel(id: string) {
-    this.props.store.currentChannel = id
+    this.props.store.updateCurrentChannel({ id })
     this.channelListVisiblity = false
   }
   handleOnInputFilter(e: React.FormEvent<HTMLInputElement>) {

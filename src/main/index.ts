@@ -41,6 +41,7 @@ const defaultPreferences = {
   theme: 'Light',
   alwaysOnTop: false,
   backgroundOpacity: 0,
+  currentChannel: '',
 }
 
 async function openClient() {

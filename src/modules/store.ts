@@ -15,7 +15,6 @@ interface INameMap {
 
 class Store {
   @observable initialized: boolean = false
-  @observable currentChannel: string = 'C9FLVQ03Z'
   webClient: SlackWebClient | any
   @observable messages: IObservableArray<MessageEvent> = observable([])
   @observable members: IObservableArray<FullUserResult> = observable([])
@@ -78,6 +77,11 @@ class Store {
     }
   }
 
+  @action.bound
+  updateCurrentChannel({ id }: { id: string }) {
+    this.preferences = { ...this.preferences, currentChannel: id }
+  }
+
   // storageから設定を復元
   async restoreFromStorage() {
     const preferences = await storage.get(storage.keys.PREFERENCES)
@@ -100,7 +104,7 @@ class Store {
 
   @computed
   get currentChannelName(): string {
-    return this.channelsName[this.currentChannel]
+    return this.channelsName[this.preferences.currentChannel]
   }
 
   @computed
@@ -120,7 +124,7 @@ class Store {
   get channelMessages(): MessageEvent[] {
     return filter(
       this.messages,
-      ({ channel }) => channel === this.currentChannel,
+      ({ channel }) => channel === this.preferences.currentChannel,
     )
   }
   @computed
@@ -158,7 +162,10 @@ class Store {
   }
 
   postMessage({ message }: { message: string }) {
-    this.webClient._postMessage({ message, channelId: this.currentChannel })
+    this.webClient._postMessage({
+      message,
+      channelId: this.preferences.currentChannel,
+    })
   }
 }
 
