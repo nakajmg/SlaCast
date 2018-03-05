@@ -20,7 +20,7 @@ class Store {
   @observable members: IObservableArray<FullUserResult> = observable([])
   @observable channels: IObservableArray<PartialChannelResult> = observable([])
   @observable subscribedChannels: IObservableArray<Object> = observable([])
-  @observable preferences: object = {}
+  @observable preferences: any = {}
 
   async initialize(token: string) {
     this.webClient = new SlackWebClient(token)
@@ -36,6 +36,7 @@ class Store {
         this.saveToStorage()
       },
     )
+    this.postMessage = this.postMessage.bind(this)
     this.initialized = true
   }
 
@@ -126,6 +127,10 @@ class Store {
       }
     })
     return messagesTree
+  }
+
+  postMessage({ message }: { message: string }) {
+    this.webClient._postMessage({ message, channelId: this.currentChannel })
   }
 }
 

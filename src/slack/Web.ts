@@ -1,4 +1,8 @@
-import { WebClient, WebApiResultAny } from '@slack/client'
+import {
+  WebClient,
+  WebApiResultAny,
+  ChatPostMessageParams,
+} from '@slack/client'
 
 interface Emoji {
   key: string
@@ -32,6 +36,26 @@ class SlackWebClient {
     const res: WebApiResultAny = await this.client.users.list()
     if (!res.ok) return []
     return res.members
+  }
+
+  async _postMessage({
+    channelId,
+    message,
+  }: {
+    channelId: string
+    message: string
+  }) {
+    const options: ChatPostMessageParams = {
+      as_user: true,
+      channel: channelId,
+    }
+    const res: WebApiResultAny = await this.client.chat.postMessage(
+      channelId,
+      message,
+      options,
+    )
+    if (!res.ok) return
+    return res.message
   }
 }
 
