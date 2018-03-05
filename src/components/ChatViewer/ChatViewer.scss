@@ -5,10 +5,11 @@
   font-family: sans-serif;
   background-color: rgba(0, 0, 0, 0);
   position: relative;
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto 1fr auto;
+  // display: grid;
+  // grid-template-columns: auto;
+  // grid-template-rows: auto 1fr auto;
   max-height: 100vh;
+  height: 100vh;
   box-sizing: border-box;
   &_Header {
     grid-column: 1;
@@ -26,6 +27,7 @@
     grid-column: 1;
     grid-row: 2;
     overflow-y: scroll;
+    flex-grow: 1;
   }
   &_Chat::-webkit-scrollbar {
     width: 0;
@@ -34,5 +36,8 @@
   &_Sender {
     grid-column: 1;
     grid-row: 3;
+    &:hover {
+      background-color: rgba(lightcyan, 0.2);
+    }
   }
 }
