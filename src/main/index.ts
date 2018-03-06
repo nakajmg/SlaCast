@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import SlackRtmClient from '../slack/Rtm'
-// import env from '../../.env.js'
+import SlackWebClient from '../slack/Web'
 import { MessageEvent, ReactionEvent } from '@slack/client'
 import storage from '../modules/storage'
 import createClientWindow from './client'
@@ -13,34 +13,35 @@ let signinWindow: BrowserWindow | null
 let rtm: any
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  app.quit()
 })
 
 app.on('ready', async () => {
   // await storage.clear() // for debug
   const token: any = await storage.get(storage.keys.CLIENT_TOKEN)
-  console.log(token)
   if (token) {
-    openClient()
-    connectRtm(token)
-  } else {
-    openSignin()
+    const web = new SlackWebClient(token)
+    const ok = await web.authTest()
+    if (ok) {
+      openClient()
+      connectRtm(token)
+      return
+    }
   }
-})
 
-ipcMain.on(events.RECEIVE_SLACK_TOKEN, async (e: Event, query: any) => {
-  await storage.set(storage.keys.CLIENT_TOKEN, query.token)
-  if (signinWindow) signinWindow.close()
-  openClient()
-  connectRtm(query.token)
+  openSignin()
+  ipcMain.on(events.RECEIVE_SLACK_TOKEN, async (e: Event, query: any) => {
+    await storage.set(storage.keys.CLIENT_TOKEN, query.token)
+    if (signinWindow) signinWindow.close()
+    openClient()
+    connectRtm(query.token)
+  })
 })
 
 const defaultPreferences = {
-  theme: 'Light',
+  theme: 'Dark',
   alwaysOnTop: true,
-  backgroundOpacity: 0,
+  backgroundOpacity: 0.1,
   border: true,
   currentChannel: '',
 }
@@ -54,6 +55,22 @@ async function openClient() {
   clientWindow = createClientWindow()
   clientWindow.on('closed', () => {
     clientWindow = null
+  })
+
+  ipcMain.on(events.SLACK_SIGN_OUT, async () => {
+    const token: any = await storage.get(storage.keys.CLIENT_TOKEN)
+    const web = new SlackWebClient(token)
+    const ok = await web.authTest()
+    if (ok) {
+      await rtm.stop()
+      await web.revokeToken()
+    }
+    await storage.clear()
+    if (clientWindow) {
+      clientWindow.webContents.session.clearStorageData({}, () => {
+        if (clientWindow) clientWindow.close()
+      })
+    }
   })
 }
 

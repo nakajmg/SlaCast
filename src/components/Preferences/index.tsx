@@ -1,6 +1,8 @@
 import * as React from 'react'
 import './Preferences.scss'
 import store from '../../modules/Store'
+import { ipcRenderer } from 'electron'
+import events from '../../modules/events'
 
 const className = 'Preferences'
 class Preferences extends React.Component {
@@ -35,6 +37,9 @@ class Preferences extends React.Component {
       ...store.preferences,
       alwaysOnTop: !store.preferences.alwaysOnTop,
     }
+  }
+  signOut() {
+    ipcRenderer.send(events.SLACK_SIGN_OUT)
   }
   render() {
     const preferences = store.preferences
@@ -85,6 +90,10 @@ class Preferences extends React.Component {
             checked={preferences.border}
             onChange={this.onChangeBorder}
           />
+        </div>
+        <div className={`${className}_Item`}>
+          <div className={`${className}_Label`}>Sign out</div>
+          <button onClick={this.signOut}>Sign out</button>
         </div>
       </div>
     )

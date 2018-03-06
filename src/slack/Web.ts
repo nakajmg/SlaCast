@@ -12,6 +12,15 @@ class SlackWebClient {
     this.client = new WebClient(this.token)
   }
 
+  async authTest() {
+    const res: WebApiResultAny = await this.client.auth.test()
+    return res.ok
+  }
+  async revokeToken() {
+    const res: WebApiResultAny = await this.client.auth.revoke()
+    return res.ok
+  }
+
   async _fetchEmojiList() {
     const res: WebApiResultAny = await this.client.emoji.list()
     if (!res.ok) return []

@@ -34,6 +34,10 @@ class SlackRtmClient extends EventEmitter {
     this.describeChannel()
   }
 
+  stop() {
+    return this.client.disconnect()
+  }
+
   describeChannel() {
     this.client.on(RTM_EVENTS.MESSAGE, (message: MessageEvent) => {
       console.log(message)
